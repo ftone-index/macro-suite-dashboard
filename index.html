@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macro Suite – FTN · GIP · GTX · PBOC</title>
+    <style>
+        /* ----- RESET & BASE ----- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #131820;
+            color: #e6e1cf;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #131820;
+            border-radius: 24px;
+            padding: 24px 20px 32px;
+            border: 1px solid #2a3342;
+        }
+
+        /* ----- TABS ----- */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #2a3342;
+            padding-bottom: 8px;
+            overflow-x: auto;
+        }
+        .tab {
+            background: none;
+            border: none;
+            color: #8b95a5;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .tab:hover { color: #e6e1cf; }
+        .tab.active {
+            color: #ffb454;
+            background: #1a1f2e;
+        }
+
+        /* ----- TAB CONTENT ----- */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ----- SUITE HEADER ----- */
+        .suite-header {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #8b95a5;
+            margin-bottom: 4px;
+        }
+        .index-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        /* ----- DUAL SCORE ----- */
+        .dual-score {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            white-space: nowrap;
+            margin-bottom: 4px;
+        }
+        .dual-score .live { color: #8E44AD; }
+        .dual-score .smoothed { color: #4169E1; }
+        .dual-score .arrow {
+            font-size: 28px;
+            color: #6b7a90;
+            margin: 0 4px;
+            vertical-align: middle;
+        }
+        .formula {
+            font-size: 12px;
+            color: #6b7a90;
+            margin-bottom: 6px;
+        }
+
+        /* ----- LABEL, CHANGE, CONFIDENCE ----- */
+        .label {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .change {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .confidence {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .confidence-HIGH { background: #1a4c2a; color: #4fc97a; }
+        .confidence-MEDIUM { background: #4a3e1a; color: #f2c94c; }
+        .confidence-LOW { background: #4a1a1a; color: #f26b6b; }
+
+        /* ----- COLLAPSIBLE SECTIONS ----- */
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #ffb454;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 0;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid #1e2733;
+            margin-top: 12px;
+            font-family: inherit;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .toggle-btn:hover { color: #ffc870; }
+        .toggle-content {
+            display: none;
+            padding-top: 8px;
+            font-size: 13px;
+            color: #b0bdcf;
+            line-height: 1.5;
+        }
+        .toggle-content.open { display: block; }
+
+        /* ----- MARKET EXPECTATION (COMPACT) ----- */
+        .market-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 4px 0;
+            font-size: 13px;
+            color: #b0bdcf;
+            border-bottom: 1px solid #1a1f2e;
+        }
+        .market-row .label { font-size: 13px; color: #8b95a5; }
+        .market-row .value { font-weight: 600; color: #e6e1cf; }
+
+        /* ----- FLIP CARD (MINIMAL) ----- */
+        .flip-card-mini {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #1a1f2e;
+            border-radius: 12px;
+            border: 1px solid #2a3342;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .flip-card-mini:hover { border-color: #3a4557; }
+        .flip-card-mini .front,
+        .flip-card-mini .back {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .flip-card-mini .back { display: none; }
+        .flip-card-mini.flipped .front { display: none; }
+        .flip-card-mini.flipped .back { display: flex; }
+        .flip-card-mini .rate-item {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 2px 0;
+            font-size: 13px;
+            color: #b0bdcf;
+        }
+        .flip-card-mini .rate-value { color: #f2c94c; font-weight: 600; }
+
+        /* ----- META & LEGAL ----- */
+        .meta {
+            font-size: 12px;
+            color: #5a6577;
+            margin-top: 20px;
+            padding-top: 12px;
+            border-top: 1px solid #1e2733;
+        }
+        .meta a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        .meta a:hover { text-decoration: underline; }
+
+        /* ----- PBOC PLACEHOLDER ----- */
+        .pboc-placeholder {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8b95a5;
+        }
+        .pboc-placeholder h2 {
+            color: #ffb454;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .pboc-placeholder p { font-size: 14px; line-height: 1.6; }
+
+        /* ----- LOADING / ERROR ----- */
+        .loading, .error {
+            font-size: 14px;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .error { color: #f26b6b; }
+        .loading { color: #6b7a90; animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* ----- RESPONSIVE (MOBILE‑FIRST) ----- */
+        @media (min-width: 600px) {
+            body { padding: 40px; }
+            .container { padding: 40px 32px 48px; }
+            .dual-score { font-size: 56px; }
+            .dual-score .arrow { font-size: 32px; }
+            .tabs { gap: 8px; }
+            .tab { font-size: 15px; padding: 10px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab active" data-tab="ftn">FTN</button>
+        <button class="tab" data-tab="gip">GIP</button>
+        <button class="tab" data-tab="gtx">GTX</button>
+        <button class="tab" data-tab="pboc">PBOC</button>
+    </div>
+
+    <!-- FTN -->
+    <div id="ftn" class="tab-content active">
+        <div class="suite-header">Index</div>
+        <div class="index-name">F‑Tone (FTN)</div>
+        <div id="ftn-loading" class="loading">Loading…</div>
+        <div id="ftn-data" style="display:none;">
+            <div class="dual-score" id="ftn-dual"></div>
+            <div class="formula" id="ftn-formula">live → 7d avg</div>
+            <div class="label" id="ftn-label"></div>
+            <div class="change" id="ftn-change"></div>
+            <div class="confidence" id="ftn-confidence"></div>
+            <button class="toggle-btn" id="ftn-sources-btn">📄 Sources <span>▼</span></button>
+            <div class="toggle-content" id="ftn-sources"></div>
+            <button class="toggle-btn" id="ftn-market-btn">📊 Market Expectation <span>▼</span></button>
+            <div class="toggle-content" id="ftn-market"></div>
+            <div class="flip-card-mini" id="ftn-flip">
+                <div class="front">↻ Click to see Fed rates</div>
+                <div class="back">
+                    <div class="rate-item"><span>Fed Funds</span><span class="rate-value" id="ftn-fed-funds">--</span></div>
+                    <div class="rate-item"><span>IORB</span><span class="rate-value" id="ftn-iorb">--</span></div>
+                    <div class="rate-item"><span>ON RRP</span><span class="rate-value" id="ftn-onrrp">--</span></div>
+                </div>
+            </div>
+            <div class="meta">
+                <span id="ftn-timestamp"></span>
+                <span style="margin:0 6px;">·</span>
+                <a href="https://ftone-index.github.io/ftone-dashboard/legal/terms.html" target="_blank">Terms</a>
+                <span style="margin:0 6px;">·</span>
+                <a href="https://ftn-index.onrender.com/api/ftn_latest" target="_blank">API</a>
+            </div>
+        </div>
+        <div id="ftn-error" class="error" style="display:none;">Unable to load data. Please try again later.</div>
+    </div>
+
+    <!-- GIP -->
+    <div id="gip" class="tab-content">
+        <div class="suite-header">Index</div>
+        <div class="index-name">G‑Pulse (GIP)</div>
+        <div id="gip-loading" class="loading">Loading…</div>
+        <div id="gip-data" style="display:none;">
+            <div class="dual-score" id="gip-dual"></div>
+            <div class="formula" id="gip-formula">live → 7d avg</div>
+            <div class="label" id="gip-label"></div>
+            <div class="change" id="gip-change"></div>
+            <div class="confidence" id="gip-confidence"></div>
+            <button class="toggle-btn" id="gip-sources-btn">📄 Sources <span>▼</span></button>
+            <div class="toggle-content" id="gip-sources"></div>
+            <button class="toggle-btn" id="gip-market-btn">📊 Market Expectation <span>▼</span></button>
+            <div class="toggle-content" id="gip-market"></div>
+            <div class="flip-card-mini" id="gip-flip">
+                <div class="front">↻ Click to see inflation drivers</div>
+                <div class="back">
+                    <div class="rate-item"><span>CPI (YoY)</span><span class="rate-value" id="gip-cpi">--</span></div>
+                    <div class="rate-item"><span>Core PCE</span><span class="rate-value" id="gip-pce">--</span></div>
+                    <div class="rate-item"><span>Breakeven 5y</span><span class="rate-value" id="gip-breakeven">--</span></div>
+                </div>
+            </div>
+            <div class="meta">
+                <span id="gip-timestamp"></span>
+                <span style="margin:0 6px;">·</span>
+                <a href="https://gip-index.github.io/gip-dashboard/legal/terms.html" target="_blank">Terms</a>
+                <span style="margin:0 6px;">·</span>
+                <a href="https://gip-index.onrender.com/api/gip_latest" target="_blank">API</a>
+            </div>
+        </div>
+        <div id="gip-error" class="error" style="display:none;">Unable to load data. Please try again later.</div>
+    </div>
+
+    <!-- GTX -->
+    <div id="gtx" class="tab-content">
+        <div class="suite-header">Index</div>
+        <div class="index-name">G‑Tension (GTX)</div>
+        <div id="gtx-loading" class="loading">Loading…</div>
+        <div id="gtx-data" style="display:none;">
+            <div class="dual-score" id="gtx-dual"></div>
+            <div class="formula" id="gtx-formula">live → 7d avg</div>
+            <div class="label" id="gtx-label"></div>
+            <div class="change" id="gtx-change"></div>
+            <div class="confidence" id="gtx-confidence"></div>
+            <button class="toggle-btn" id="gtx-sources-btn">📄 Sources <span>▼</span></button>
+            <div class="toggle-content" id="gtx-sources"></div>
+            <button class="toggle-btn" id="gtx-market-btn">📊 Market Expectation <span>▼</span></button>
+            <div class="toggle-content" id="gtx-market"></div>
+            <div class="flip-card-mini" id="gtx-flip">
+                <div class="front">↻ Click to see risk indicators</div>
+                <div class="back">
+                    <div class="rate-item"><span>VIX</span><span class="rate-value" id="gtx-vix">--</span></div>
+                    <div class="rate-item"><span>Gold Change</span><span class="rate-value" id="gtx-gold">--</span></div>
+                    <div class="rate-item"><span>Defence ETF</span><span class="rate-value" id="gtx-defence">--</span></div>
+                </div>
+            </div>
+            <div class="meta">
+                <span id="gtx-timestamp"></span>
+                <span style="margin:0 6px;">·</span>
+                <a href="https://gtx-index.github.io/gtx-dashboard/legal/terms.html" target="_blank">Terms</a>
+                <span style="margin:0 6px;">·</span>
+                <a href="https://gtx-index.onrender.com/api/gtx_latest" target="_blank">API</a>
+            </div>
+        </div>
+        <div id="gtx-error" class="error" style="display:none;">Unable to load data. Please try again later.</div>
+    </div>
+
+    <!-- PBOC (Placeholder) -->
+    <div id="pboc" class="tab-content">
+        <div class="suite-header">Coming soon</div>
+        <div class="index-name">PBOC Tone Index</div>
+        <div class="pboc-placeholder">
+            <h2>🏛️</h2>
+            <p>The People's Bank of China Tone Index is currently in development.</p>
+            <p style="font-size:13px; color:#5a6577; margin-top:8px;">Sign up for early access when it launches.</p>
+            <div style="margin-top:16px;">
+                <a href="https://ftone-index.github.io/ftone-landing/#contact" target="_blank" style="color:#58a6ff; text-decoration:none;">Contact us</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ---- API ENDPOINTS ----
+    const API = {
+        ftn: 'https://ftn-index.onrender.com/api/ftn_latest',
+        gip: 'https://gip-index.onrender.com/api/gip_latest',
+        gtx: 'https://gtx-index.onrender.com/api/gtx_latest'
+    };
+
+    const MARKET_API = {
+        ftn: 'https://ftn-market.onrender.com/api/market_ftn',
+        gip: 'https://gip-index.onrender.com/api/market_gip',
+        gtx: 'https://gtx-index.onrender.com/api/market_gtx'
+    };
+
+    const RATES_API = {
+        ftn: 'https://ftn-market.onrender.com/api/fed_rates',
+        gip: 'https://gip-index.onrender.com/api/gip_drivers',
+        gtx: 'https://gtx-index.onrender.com/api/gtx_drivers'
+    };
+
+    // ---- HELPERS ----
+    function getGradientColor(score) {
+        const s = Math.max(0, Math.min(100, score));
+        const g = { r: 79, g: 201, b: 122 };
+        const y = { r: 242, g: 201, b: 76 };
+        const r = { r: 242, g: 107, b: 107 };
+        let cr, cg, cb;
+        if (s <= 50) { const t = s / 50; cr = Math.round(g.r + t * (y.r - g.r)); cg = Math.round(g.g + t * (y.g - g.g)); cb = Math.round(g.b + t * (y.b - g.b)); }
+        else { const t = (s - 50) / 50; cr = Math.round(y.r + t * (r.r - y.r)); cg = Math.round(y.g + t * (r.g - y.g)); cb = Math.round(y.b + t * (r.b - y.b)); }
+        return `rgb(${cr},${cg},${cb})`;
+    }
+
+    function getLabel(score, scale) {
+        if (scale === 'dovish') {
+            if (score <= 20) return 'Extremely Dovish';
+            if (score <= 40) return 'Dovish';
+            if (score <= 60) return 'Neutral';
+            if (score <= 80) return 'Hawkish';
+            return 'Extremely Hawkish';
+        }
+        if (scale === 'inflation') {
+            if (score <= 20) return 'Extremely Deflationary';
+            if (score <= 40) return 'Deflationary';
+            if (score <= 60) return 'Neutral';
+            if (score <= 80) return 'Inflationary';
+            return 'Extremely Inflationary';
+        }
+        if (scale === 'risk') {
+            if (score <= 20) return 'Extremely Low Risk';
+            if (score <= 40) return 'Low Risk';
+            if (score <= 60) return 'Moderate Risk';
+            if (score <= 80) return 'High Risk';
+            return 'Extreme Risk';
+        }
+        return 'Neutral';
+    }
+
+    function formatTime(ts) {
+        if (!ts) return '';
+        const d = new Date(ts);
+        return d.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) + ' UTC';
+    }
+
+    // ---- RENDER FUNCTIONS ----
+    function renderIndex(data, id, scale) {
+        const el = (id) => document.getElementById(id);
+        const score = data.score;
+        const raw = data.raw_score !== undefined ? data.raw_score : score;
+        const change = parseFloat(data.change) || 0;
+        const label = getLabel(score, scale);
+
+        el(id + '-dual').innerHTML = `<span class="live">${raw.toFixed(1)}</span> <span class="arrow">→</span> <span class="smoothed">${score.toFixed(1)}</span>`;
+        el(id + '-formula').innerText = 'live → 7d avg';
+
+        const labelEl = el(id + '-label');
+        labelEl.innerText = label;
+        labelEl.style.color = getGradientColor(score);
+
+        const changeEl = el(id + '-change');
+        if (change === 0) {
+            changeEl.innerHTML = `— ${Math.abs(change).toFixed(1)}`;
+            changeEl.style.color = '#8b95a5';
+        } else {
+            const arrow = change > 0 ? '▲' : '▼';
+            changeEl.innerHTML = `${arrow} ${Math.abs(change).toFixed(1)}`;
+            changeEl.style.color = change > 0 ? '#f26b6b' : '#4fc97a';
+        }
+
+        const conf = data.confidence || 'MEDIUM';
+        const confEl = el(id + '-confidence');
+        confEl.innerText = `Confidence: ${conf}`;
+        confEl.className = 'confidence confidence-' + conf;
+
+        // Sources
+        const sources = data.sources || [];
+        const sourcesEl = el(id + '-sources');
+        if (sources.length) {
+            sourcesEl.innerHTML = sources.map(s =>
+                `<div style="padding:2px 0; font-size:13px; color:#b0bdcf;"><a href="${s.url}" target="_blank" style="color:#58a6ff;">${s.title}</a> <span style="color:#5a6577;">(${s.type})</span></div>`
+            ).join('');
+        } else {
+            sourcesEl.innerHTML = '<div style="color:#5a6577; font-size:13px;">No sources available.</div>';
+        }
+
+        // Timestamp
+        el(id + '-timestamp').innerText = formatTime(data.timestamp);
+
+        // Show data, hide loading
+        el(id + '-loading').style.display = 'none';
+        el(id + '-data').style.display = 'block';
+        el(id + '-error').style.display = 'none';
+    }
+
+    function renderMarket(data, id) {
+        const el = (id) => document.getElementById(id);
+        if (!data || data.error) {
+            el(id + '-market').innerHTML = '<div style="color:#5a6577; font-size:13px;">Market data unavailable.</div>';
+            return;
+        }
+        const score = data.score;
+        const label = data.label || '';
+        const comp = data.components || {};
+        let details = '';
+        if (comp.y2 !== undefined) details += `<div class="market-row"><span class="label">2‑year yield</span><span class="value">${comp.y2.toFixed(2)}%</span></div>`;
+        if (comp.spread !== undefined) details += `<div class="market-row"><span class="label">2y/10y spread</span><span class="value">${comp.spread.toFixed(2)}%</span></div>`;
+        if (comp.dxy_change !== undefined) details += `<div class="market-row"><span class="label">DXY change</span><span class="value">${comp.dxy_change > 0 ? '+' : ''}${comp.dxy_change.toFixed(3)}%</span></div>`;
+        if (comp.breakeven_rate !== undefined) details += `<div class="market-row"><span class="label">Breakeven</span><span class="value">${comp.breakeven_rate.toFixed(2)}%</span></div>`;
+        if (comp.gold_change !== undefined) details += `<div class="market-row"><span class="label">Gold change</span><span class="value">${comp.gold_change > 0 ? '+' : ''}${comp.gold_change.toFixed(2)}%</span></div>`;
+        if (comp.oil_change !== undefined) details += `<div class="market-row"><span class="label">Oil change</span><span class="value">${comp.oil_change > 0 ? '+' : ''}${comp.oil_change.toFixed(2)}%</span></div>`;
+        if (comp.vix_change !== undefined) details += `<div class="market-row"><span class="label">VIX change</span><span class="value">${comp.vix_change > 0 ? '+' : ''}${comp.vix_change.toFixed(2)}%</span></div>`;
+        if (comp.defence_change !== undefined) details += `<div class="market-row"><span class="label">Defence ETF</span><span class="value">${comp.defence_change > 0 ? '+' : ''}${comp.defence_change.toFixed(2)}%</span></div>`;
+
+        el(id + '-market').innerHTML = `
+            <div class="market-row"><span class="label">Score</span><span class="value">${score.toFixed(1)} · ${label}</span></div>
+            ${details}
+        `;
+    }
+
+    function renderFlip(data, id, type) {
+        const el = (id) => document.getElementById(id);
+        if (!data || data.error) {
+            const els = [id + '-fed-funds', id + '-iorb', id + '-onrrp', id + '-cpi', id + '-pce', id + '-breakeven', id + '-vix', id + '-gold', id + '-defence'];
+            els.forEach(e => { if (document.getElementById(e)) document.getElementById(e).innerText = '--'; });
+            return;
+        }
+        if (type === 'ftn') {
+            el(id + '-fed-funds').innerText = data.fed_funds || '--';
+            el(id + '-iorb').innerText = data.iorb || '--';
+            el(id + '-onrrp').innerText = data.onrrp || '--';
+        } else if (type === 'gip') {
+            el(id + '-cpi').innerText = data.cpi_yoy !== undefined ? data.cpi_yoy.toFixed(2) + '%' : '--';
+            el(id + '-pce').innerText = data.core_pce !== undefined ? data.core_pce.toFixed(2) + '%' : '--';
+            el(id + '-breakeven').innerText = data.breakeven_5y !== undefined ? data.breakeven_5y.toFixed(2) + '%' : '--';
+        } else if (type === 'gtx') {
+            el(id + '-vix').innerText = data.vix !== undefined ? data.vix.toFixed(2) : '--';
+            el(id + '-gold').innerText = data.gold_change !== undefined ? (data.gold_change > 0 ? '+' : '') + data.gold_change.toFixed(2) + '%' : '--';
+            el(id + '-defence').innerText = data.ita_change !== undefined ? (data.ita_change > 0 ? '+' : '') + data.ita_change.toFixed(2) + '%' : '--';
+        }
+    }
+
+    // ---- FETCH FUNCTIONS ----
+    async function fetchIndex(id, scale) {
+        const el = (id) => document.getElementById(id);
+        el(id + '-loading').style.display = 'block';
+        el(id + '-data').style.display = 'none';
+        el(id + '-error').style.display = 'none';
+
+        try {
+            const res = await fetch(API[id]);
+            if (!res.ok) throw new Error('API error');
+            const data = await res.json();
+            if (data.error) throw new Error(data.error);
+            renderIndex(data, id, scale);
+            // Market
+            try {
+                const mRes = await fetch(MARKET_API[id]);
+                if (mRes.ok) {
+                    const mData = await mRes.json();
+                    renderMarket(mData, id);
+                }
+            } catch (e) { /* ignore */ }
+            // Rates / drivers
+            try {
+                const rRes = await fetch(RATES_API[id]);
+                if (rRes.ok) {
+                    const rData = await rRes.json();
+                    renderFlip(rData, id, id);
+                }
+            } catch (e) { /* ignore */ }
+        } catch (e) {
+            el(id + '-loading').style.display = 'none';
+            el(id + '-error').style.display = 'block';
+        }
+    }
+
+    // ---- TAB SWITCHING ----
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            const target = document.getElementById(this.dataset.tab);
+            if (target) target.classList.add('active');
+            // Load data if not already loaded
+            const id = this.dataset.tab;
+            if (id !== 'pboc' && !document.getElementById(id + '-data').dataset.loaded) {
+                const scales = { ftn: 'dovish', gip: 'inflation', gtx: 'risk' };
+                fetchIndex(id, scales[id]);
+                document.getElementById(id + '-data').dataset.loaded = 'true';
+            }
+        });
+    });
+
+    // ---- TOGGLE BUTTONS ----
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            if (content && content.classList.contains('toggle-content')) {
+                content.classList.toggle('open');
+                const span = this.querySelector('span');
+                if (span) span.innerText = content.classList.contains('open') ? '▲' : '▼';
+            }
+        });
+    });
+
+    // ---- FLIP CARDS ----
+    document.querySelectorAll('.flip-card-mini').forEach(card => {
+        card.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+    });
+
+    // ---- INITIAL LOAD (FTN) ----
+    fetchIndex('ftn', 'dovish');
+    document.getElementById('ftn-data').dataset.loaded = 'true';
+</script>
+
+</body>
+</html>
