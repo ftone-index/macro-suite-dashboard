@@ -8,50 +8,51 @@
         /* ----- RESET & BASE ----- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #131820;
-            color: #e6e1cf;
+            background: #0d1117;
+            color: #c9d1d9;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
             padding: 16px;
         }
         .container {
             max-width: 600px;
             width: 100%;
-            background: #131820;
-            border-radius: 24px;
-            padding: 24px 20px 32px;
-            border: 1px solid #2a3342;
+            background: #161b22;
+            border-radius: 20px;
+            padding: 24px 20px 40px;
+            border: 1px solid #30363d;
+            min-height: 90vh;
         }
 
         /* ----- TABS ----- */
         .tabs {
             display: flex;
-            gap: 4px;
-            margin-bottom: 24px;
-            border-bottom: 1px solid #2a3342;
+            gap: 2px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #30363d;
             padding-bottom: 8px;
             overflow-x: auto;
         }
         .tab {
             background: none;
             border: none;
-            color: #8b95a5;
-            font-size: 14px;
+            color: #8b949e;
+            font-size: 13px;
             font-weight: 500;
-            padding: 8px 14px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
             white-space: nowrap;
             transition: 0.2s;
             font-family: inherit;
         }
-        .tab:hover { color: #e6e1cf; }
+        .tab:hover { color: #c9d1d9; }
         .tab.active {
-            color: #ffb454;
-            background: #1a1f2e;
+            color: #f0c040;
+            background: #1c2333;
         }
 
         /* ----- TAB CONTENT ----- */
@@ -60,121 +61,121 @@
 
         /* ----- SUITE HEADER ----- */
         .suite-header {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #8b95a5;
-            margin-bottom: 4px;
+            letter-spacing: 0.08em;
+            color: #8b949e;
+            margin-bottom: 2px;
         }
         .index-name {
             font-size: 16px;
             font-weight: 600;
             color: #ffffff;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         /* ----- DUAL SCORE ----- */
         .dual-score {
-            font-size: 48px;
-            font-weight: 700;
+            font-size: 40px;
+            font-weight: 600;
             line-height: 1.1;
             white-space: nowrap;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+            letter-spacing: -0.02em;
         }
-        .dual-score .live { color: #8E44AD; }
-        .dual-score .smoothed { color: #4169E1; }
+        .dual-score .live { color: #f0c040; }
+        .dual-score .smoothed { color: #8b9dc0; }
         .dual-score .arrow {
-            font-size: 28px;
+            font-size: 24px;
             color: #6b7a90;
             margin: 0 4px;
             vertical-align: middle;
         }
         .formula {
-            font-size: 12px;
+            font-size: 11px;
             color: #6b7a90;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         /* ----- LABEL, CHANGE, CONFIDENCE ----- */
         .label {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 500;
             margin-bottom: 2px;
         }
         .change {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 500;
             margin-bottom: 4px;
         }
         .confidence {
             display: inline-block;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 2px 12px;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #1c2333;
+            color: #8b949e;
         }
-        .confidence-HIGH { background: #1a4c2a; color: #4fc97a; }
-        .confidence-MEDIUM { background: #4a3e1a; color: #f2c94c; }
-        .confidence-LOW { background: #4a1a1a; color: #f26b6b; }
 
         /* ----- COLLAPSIBLE SECTIONS ----- */
         .toggle-btn {
             background: none;
             border: none;
-            color: #ffb454;
-            font-size: 13px;
+            color: #f0c040;
+            font-size: 12px;
             font-weight: 500;
-            padding: 8px 0;
+            padding: 6px 0;
             cursor: pointer;
             width: 100%;
             text-align: left;
-            border-bottom: 1px solid #1e2733;
-            margin-top: 12px;
+            border-bottom: 1px solid #30363d;
+            margin-top: 10px;
             font-family: inherit;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .toggle-btn:hover { color: #ffc870; }
+        .toggle-btn:hover { color: #f5d66a; }
         .toggle-content {
             display: none;
-            padding-top: 8px;
+            padding-top: 6px;
             font-size: 13px;
-            color: #b0bdcf;
+            color: #c9d1d9;
             line-height: 1.5;
         }
         .toggle-content.open { display: block; }
 
-        /* ----- MARKET EXPECTATION (COMPACT) ----- */
+        /* ----- MARKET EXPECTATION ----- */
         .market-row {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding: 4px 0;
+            padding: 3px 0;
             font-size: 13px;
-            color: #b0bdcf;
-            border-bottom: 1px solid #1a1f2e;
+            color: #c9d1d9;
+            border-bottom: 1px solid #1c2333;
         }
-        .market-row .label { font-size: 13px; color: #8b95a5; }
-        .market-row .value { font-weight: 600; color: #e6e1cf; }
+        .market-row .label { font-size: 13px; color: #8b949e; }
+        .market-row .value { font-weight: 500; color: #ffffff; }
 
         /* ----- FLIP CARD (MINIMAL) ----- */
         .flip-card-mini {
-            margin-top: 12px;
-            padding: 12px 16px;
-            background: #1a1f2e;
-            border-radius: 12px;
-            border: 1px solid #2a3342;
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: #1c2333;
+            border-radius: 10px;
+            border: 1px solid #30363d;
             cursor: pointer;
             transition: 0.2s;
         }
-        .flip-card-mini:hover { border-color: #3a4557; }
+        .flip-card-mini:hover { border-color: #4a5568; }
         .flip-card-mini .front,
         .flip-card-mini .back {
             display: flex;
             justify-content: space-between;
-            font-size: 14px;
+            font-size: 13px;
         }
         .flip-card-mini .back { display: none; }
         .flip-card-mini.flipped .front { display: none; }
@@ -185,17 +186,17 @@
             width: 100%;
             padding: 2px 0;
             font-size: 13px;
-            color: #b0bdcf;
+            color: #c9d1d9;
         }
-        .flip-card-mini .rate-value { color: #f2c94c; font-weight: 600; }
+        .flip-card-mini .rate-value { color: #f0c040; font-weight: 500; }
 
         /* ----- META & LEGAL ----- */
         .meta {
-            font-size: 12px;
+            font-size: 11px;
             color: #5a6577;
-            margin-top: 20px;
-            padding-top: 12px;
-            border-top: 1px solid #1e2733;
+            margin-top: 16px;
+            padding-top: 10px;
+            border-top: 1px solid #1c2333;
         }
         .meta a {
             color: #58a6ff;
@@ -206,20 +207,20 @@
         /* ----- PBOC PLACEHOLDER ----- */
         .pboc-placeholder {
             text-align: center;
-            padding: 40px 20px;
-            color: #8b95a5;
+            padding: 30px 20px;
+            color: #8b949e;
         }
         .pboc-placeholder h2 {
-            color: #ffb454;
-            font-size: 22px;
-            margin-bottom: 8px;
+            color: #f0c040;
+            font-size: 20px;
+            margin-bottom: 6px;
         }
         .pboc-placeholder p { font-size: 14px; line-height: 1.6; }
 
         /* ----- LOADING / ERROR ----- */
         .loading, .error {
             font-size: 14px;
-            padding: 20px 0;
+            padding: 16px 0;
             text-align: center;
         }
         .error { color: #f26b6b; }
@@ -230,14 +231,14 @@
             100% { opacity: 0.4; }
         }
 
-        /* ----- RESPONSIVE (MOBILE‑FIRST) ----- */
+        /* ----- RESPONSIVE ----- */
         @media (min-width: 600px) {
-            body { padding: 40px; }
-            .container { padding: 40px 32px 48px; }
-            .dual-score { font-size: 56px; }
-            .dual-score .arrow { font-size: 32px; }
-            .tabs { gap: 8px; }
-            .tab { font-size: 15px; padding: 10px 18px; }
+            body { padding: 40px; align-items: center; }
+            .container { padding: 40px 32px 48px; min-height: auto; }
+            .dual-score { font-size: 48px; }
+            .dual-score .arrow { font-size: 28px; }
+            .tabs { gap: 4px; }
+            .tab { font-size: 14px; padding: 8px 16px; }
         }
     </style>
 </head>
@@ -392,17 +393,6 @@
     };
 
     // ---- HELPERS ----
-    function getGradientColor(score) {
-        const s = Math.max(0, Math.min(100, score));
-        const g = { r: 79, g: 201, b: 122 };
-        const y = { r: 242, g: 201, b: 76 };
-        const r = { r: 242, g: 107, b: 107 };
-        let cr, cg, cb;
-        if (s <= 50) { const t = s / 50; cr = Math.round(g.r + t * (y.r - g.r)); cg = Math.round(g.g + t * (y.g - g.g)); cb = Math.round(g.b + t * (y.b - g.b)); }
-        else { const t = (s - 50) / 50; cr = Math.round(y.r + t * (r.r - y.r)); cg = Math.round(y.g + t * (r.g - y.g)); cb = Math.round(y.b + t * (r.b - y.b)); }
-        return `rgb(${cr},${cg},${cb})`;
-    }
-
     function getLabel(score, scale) {
         if (scale === 'dovish') {
             if (score <= 20) return 'Extremely Dovish';
@@ -447,12 +437,12 @@
 
         const labelEl = el(id + '-label');
         labelEl.innerText = label;
-        labelEl.style.color = getGradientColor(score);
+        labelEl.style.color = '#f0c040';
 
         const changeEl = el(id + '-change');
         if (change === 0) {
             changeEl.innerHTML = `— ${Math.abs(change).toFixed(1)}`;
-            changeEl.style.color = '#8b95a5';
+            changeEl.style.color = '#8b949e';
         } else {
             const arrow = change > 0 ? '▲' : '▼';
             changeEl.innerHTML = `${arrow} ${Math.abs(change).toFixed(1)}`;
@@ -460,19 +450,17 @@
         }
 
         const conf = data.confidence || 'MEDIUM';
-        const confEl = el(id + '-confidence');
-        confEl.innerText = `Confidence: ${conf}`;
-        confEl.className = 'confidence confidence-' + conf;
+        el(id + '-confidence').innerText = `Confidence: ${conf}`;
 
         // Sources
         const sources = data.sources || [];
         const sourcesEl = el(id + '-sources');
         if (sources.length) {
             sourcesEl.innerHTML = sources.map(s =>
-                `<div style="padding:2px 0; font-size:13px; color:#b0bdcf;"><a href="${s.url}" target="_blank" style="color:#58a6ff;">${s.title}</a> <span style="color:#5a6577;">(${s.type})</span></div>`
+                `<div style="padding:2px 0; font-size:13px; color:#c9d1d9;"><a href="${s.url}" target="_blank" style="color:#58a6ff;">${s.title}</a> <span style="color:#6b7a90;">(${s.type})</span></div>`
             ).join('');
         } else {
-            sourcesEl.innerHTML = '<div style="color:#5a6577; font-size:13px;">No sources available.</div>';
+            sourcesEl.innerHTML = '<div style="color:#6b7a90; font-size:13px;">No sources available.</div>';
         }
 
         // Timestamp
@@ -487,7 +475,7 @@
     function renderMarket(data, id) {
         const el = (id) => document.getElementById(id);
         if (!data || data.error) {
-            el(id + '-market').innerHTML = '<div style="color:#5a6577; font-size:13px;">Market data unavailable.</div>';
+            el(id + '-market').innerHTML = '<div style="color:#6b7a90; font-size:13px;">Market data unavailable.</div>';
             return;
         }
         const score = data.score;
@@ -502,6 +490,7 @@
         if (comp.oil_change !== undefined) details += `<div class="market-row"><span class="label">Oil change</span><span class="value">${comp.oil_change > 0 ? '+' : ''}${comp.oil_change.toFixed(2)}%</span></div>`;
         if (comp.vix_change !== undefined) details += `<div class="market-row"><span class="label">VIX change</span><span class="value">${comp.vix_change > 0 ? '+' : ''}${comp.vix_change.toFixed(2)}%</span></div>`;
         if (comp.defence_change !== undefined) details += `<div class="market-row"><span class="label">Defence ETF</span><span class="value">${comp.defence_change > 0 ? '+' : ''}${comp.defence_change.toFixed(2)}%</span></div>`;
+        if (comp.ita_change !== undefined) details += `<div class="market-row"><span class="label">ITA change</span><span class="value">${comp.ita_change > 0 ? '+' : ''}${comp.ita_change.toFixed(2)}%</span></div>`;
 
         el(id + '-market').innerHTML = `
             <div class="market-row"><span class="label">Score</span><span class="value">${score.toFixed(1)} · ${label}</span></div>
@@ -574,7 +563,6 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             const target = document.getElementById(this.dataset.tab);
             if (target) target.classList.add('active');
-            // Load data if not already loaded
             const id = this.dataset.tab;
             if (id !== 'pboc' && !document.getElementById(id + '-data').dataset.loaded) {
                 const scales = { ftn: 'dovish', gip: 'inflation', gtx: 'risk' };
