@@ -20,15 +20,15 @@
         .container {
             width: 100%;
             max-width: 720px;
-            background: #1a1a1a;
+            background: #000000;
             padding: 24px 20px 40px;
             min-height: 100vh;
             border: none;
             border-radius: 0;
-            box-shadow: 0 0 40px rgba(255,255,255,0.02);
+            box-shadow: none;
         }
 
-        /* Tabs */
+        /* ----- TABS ----- */
         .tabs {
             display: flex;
             gap: 0;
@@ -58,7 +58,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* Header */
+        /* ----- HEADER (Bold, Shiny, Even Padding) ----- */
         .index-header {
             font-size: 15px;
             font-weight: 600;
@@ -66,22 +66,54 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             margin-bottom: 20px;
-            padding: 10px 0;
+            padding: 14px 0;
             border-bottom: 2px solid #30363d;
+            border-top: 2px solid #30363d;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            text-shadow: 0 0 12px rgba(240, 192, 64, 0.15);
+            text-shadow: 0 0 20px rgba(240, 192, 64, 0.25);
+            background: rgba(240, 192, 64, 0.03);
         }
         .index-header .sub {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
             text-transform: uppercase;
             color: #f0c040;
-            text-shadow: 0 0 12px rgba(240, 192, 64, 0.15);
+            text-shadow: 0 0 20px rgba(240, 192, 64, 0.25);
+        }
+        /* GIP header override */
+        .index-header.gip {
+            color: #3cc8ff;
+            text-shadow: 0 0 20px rgba(60, 200, 255, 0.2);
+            background: rgba(60, 200, 255, 0.03);
+        }
+        .index-header.gip .sub {
+            color: #3cc8ff;
+            text-shadow: 0 0 20px rgba(60, 200, 255, 0.2);
+        }
+        /* GTX header override */
+        .index-header.gtx {
+            color: #ff8c42;
+            text-shadow: 0 0 20px rgba(255, 140, 66, 0.2);
+            background: rgba(255, 140, 66, 0.03);
+        }
+        .index-header.gtx .sub {
+            color: #ff8c42;
+            text-shadow: 0 0 20px rgba(255, 140, 66, 0.2);
+        }
+        /* PBOC header override */
+        .index-header.pboc {
+            color: #8b949e;
+            text-shadow: none;
+            background: transparent;
+        }
+        .index-header.pboc .sub {
+            color: #8b949e;
+            text-shadow: none;
         }
 
-        /* Sections */
+        /* ----- SECTIONS ----- */
         .section {
             margin-bottom: 20px;
             padding-bottom: 16px;
@@ -89,7 +121,7 @@
         }
         .section:last-child { border-bottom: none; margin-bottom: 0; }
 
-        /* Dual Score */
+        /* ----- DUAL SCORE ----- */
         .dual-score {
             font-size: 42px;
             font-weight: 600;
@@ -134,7 +166,7 @@
             background: transparent;
         }
 
-        /* Toggles (unified font, size, colour) */
+        /* ----- TOGGLES (Unified Gold Arrows) ----- */
         .toggle-btn {
             background: none;
             border: none;
@@ -151,11 +183,21 @@
             align-items: center;
         }
         .toggle-btn:hover { color: #f5d66a; }
+        .toggle-btn span {
+            color: #f0c040;
+        }
         .toggle-btn-market {
             color: #f0c040;
             font-size: 14px;
             font-weight: 500;
         }
+        /* GIP toggle override */
+        .toggle-btn.gip { color: #3cc8ff; }
+        .toggle-btn.gip span { color: #3cc8ff; }
+        /* GTX toggle override */
+        .toggle-btn.gtx { color: #ff8c42; }
+        .toggle-btn.gtx span { color: #ff8c42; }
+
         .toggle-content {
             display: none;
             padding-top: 8px;
@@ -165,13 +207,13 @@
         }
         .toggle-content.open { display: block; }
 
-        /* Sources */
+        /* ----- SOURCES ----- */
         .source-item { padding: 3px 0; font-size: 13px; color: #c9d1d9; }
         .source-item .type { color: #6b7a90; }
         .source-item a { color: #c9d1d9; text-decoration: none; }
         .source-item a:hover { text-decoration: underline; }
 
-        /* Market Expectation */
+        /* ----- MARKET EXPECTATION ----- */
         .market-row {
             display: flex;
             justify-content: space-between;
@@ -184,7 +226,7 @@
         .market-row .label { color: #c9d1d9; }
         .market-row .value { font-weight: 500; color: #c9d1d9; }
 
-        /* Fed Rates */
+        /* ----- RATES / DRIVERS ----- */
         .rate-item {
             display: flex;
             justify-content: space-between;
@@ -196,7 +238,7 @@
         .rate-item:last-child { border-bottom: none; }
         .rate-value { color: #c9d1d9; font-weight: 500; }
 
-        /* Methodology */
+        /* ----- METHODOLOGY ----- */
         .methodology-content {
             font-size: 13px;
             color: #c9d1d9;
@@ -205,7 +247,7 @@
         .methodology-content p { margin-bottom: 8px; }
         .methodology-content strong { color: #f0c040; }
 
-        /* Meta */
+        /* ----- META ----- */
         .meta {
             font-size: 11px;
             color: #5a6577;
@@ -216,7 +258,7 @@
         .meta a { color: #58a6ff; text-decoration: none; }
         .meta a:hover { text-decoration: underline; }
 
-        /* PBOC */
+        /* ----- PBOC ----- */
         .pboc-placeholder {
             text-align: center;
             padding: 40px 20px;
@@ -225,21 +267,26 @@
         .pboc-placeholder h2 { color: #8b949e; font-size: 20px; margin-bottom: 6px; }
         .pboc-placeholder p { font-size: 14px; line-height: 1.6; }
 
-        /* Loading / Error */
+        /* ----- LOADING / ERROR ----- */
         .loading, .error { font-size: 14px; padding: 20px 0; text-align: center; }
         .error { color: #f26b6b; }
         .loading { color: #6b7a90; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
+        /* ----- RESPONSIVE (Desktop) ----- */
         @media (min-width: 721px) {
-            body { padding: 40px; align-items: center; background: #000000; }
+            body {
+                padding: 0;
+                align-items: flex-start;
+                background: #000000;
+            }
             .container {
-                max-width: 720px;
-                border-radius: 20px;
-                border: 1px solid #30363d;
-                min-height: auto;
+                max-width: 100%;
+                border-radius: 0;
+                border: none;
+                min-height: 100vh;
                 padding: 40px 36px 48px;
-                background: #1a1a1a;
+                background: #000000;
             }
             .dual-score { font-size: 48px; }
             .dual-score .arrow { font-size: 28px; }
@@ -291,7 +338,7 @@
                     <span class="toggle-btn-market">Market Expectation</span>
                     <span id="ftn-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
-                <button class="toggle-btn" id="ftn-market-btn" style="color:#8b949e; font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
+                <button class="toggle-btn" id="ftn-market-btn" style="font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
                 <div class="toggle-content" id="ftn-market"></div>
             </div>
 
@@ -324,9 +371,9 @@
 
     <!-- GIP -->
     <div id="gip" class="tab-content">
-        <div class="index-header" style="color:#3cc8ff; text-shadow:0 0 12px rgba(60,200,255,0.12);">
+        <div class="index-header gip">
             <span>G‑PULSE (GIP)</span>
-            <span class="sub" style="color:#3cc8ff;">GLOBAL INFLATION PULSE INDEX</span>
+            <span class="sub">GLOBAL INFLATION PULSE INDEX</span>
         </div>
         <div id="gip-loading" class="loading">Loading…</div>
         <div id="gip-data" style="display:none;">
@@ -336,11 +383,11 @@
                 <div class="label" id="gip-label"></div>
                 <div class="change" id="gip-change"></div>
                 <div class="confidence" id="gip-confidence"></div>
-                <button class="toggle-btn" id="gip-sources-btn" style="color:#3cc8ff;">Sources <span>▼</span></button>
+                <button class="toggle-btn gip" id="gip-sources-btn">Sources <span>▼</span></button>
                 <div class="toggle-content" id="gip-sources"></div>
             </div>
             <div class="section">
-                <button class="toggle-btn" id="gip-flip-btn" style="color:#3cc8ff;">Inflation Drivers <span>▼</span></button>
+                <button class="toggle-btn gip" id="gip-flip-btn">Inflation Drivers <span>▼</span></button>
                 <div class="toggle-content" id="gip-flip-content">
                     <div class="rate-item"><span>CPI (YoY)</span><span class="rate-value" id="gip-cpi">--</span></div>
                     <div class="rate-item"><span>Core PCE</span><span class="rate-value" id="gip-pce">--</span></div>
@@ -352,11 +399,11 @@
                     <span style="font-weight:500; color:#3cc8ff; font-size:14px;">Market Expectation</span>
                     <span id="gip-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
-                <button class="toggle-btn" id="gip-market-btn" style="color:#8b949e; font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
+                <button class="toggle-btn gip" id="gip-market-btn" style="font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
                 <div class="toggle-content" id="gip-market"></div>
             </div>
             <div class="section">
-                <button class="toggle-btn" id="gip-methodology-btn" style="color:#3cc8ff;">Methodology <span>▼</span></button>
+                <button class="toggle-btn gip" id="gip-methodology-btn">Methodology <span>▼</span></button>
                 <div class="toggle-content methodology-content" id="gip-methodology">
                     <p><strong>1. Scale:</strong> The G‑Pulse Index ranges from 0 (extremely deflationary) to 100 (extremely inflationary). It measures global price pressures using AI‑driven sentiment analysis of earnings calls, ISM reports, BLS CPI releases, and shipping statements.</p>
                     <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong>.</p>
@@ -382,9 +429,9 @@
 
     <!-- GTX -->
     <div id="gtx" class="tab-content">
-        <div class="index-header" style="color:#ff8c42; text-shadow:0 0 12px rgba(255,140,66,0.12);">
+        <div class="index-header gtx">
             <span>G‑TENSION (GTX)</span>
-            <span class="sub" style="color:#ff8c42;">GEOPOLITICAL TEMPERATURE INDEX</span>
+            <span class="sub">GEOPOLITICAL TEMPERATURE INDEX</span>
         </div>
         <div id="gtx-loading" class="loading">Loading…</div>
         <div id="gtx-data" style="display:none;">
@@ -394,11 +441,11 @@
                 <div class="label" id="gtx-label"></div>
                 <div class="change" id="gtx-change"></div>
                 <div class="confidence" id="gtx-confidence"></div>
-                <button class="toggle-btn" id="gtx-sources-btn" style="color:#ff8c42;">Sources <span>▼</span></button>
+                <button class="toggle-btn gtx" id="gtx-sources-btn">Sources <span>▼</span></button>
                 <div class="toggle-content" id="gtx-sources"></div>
             </div>
             <div class="section">
-                <button class="toggle-btn" id="gtx-flip-btn" style="color:#ff8c42;">Risk Indicators <span>▼</span></button>
+                <button class="toggle-btn gtx" id="gtx-flip-btn">Risk Indicators <span>▼</span></button>
                 <div class="toggle-content" id="gtx-flip-content">
                     <div class="rate-item"><span>VIX</span><span class="rate-value" id="gtx-vix">--</span></div>
                     <div class="rate-item"><span>Gold Change</span><span class="rate-value" id="gtx-gold">--</span></div>
@@ -410,11 +457,11 @@
                     <span style="font-weight:500; color:#ff8c42; font-size:14px;">Market Expectation</span>
                     <span id="gtx-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
-                <button class="toggle-btn" id="gtx-market-btn" style="color:#8b949e; font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
+                <button class="toggle-btn gtx" id="gtx-market-btn" style="font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
                 <div class="toggle-content" id="gtx-market"></div>
             </div>
             <div class="section">
-                <button class="toggle-btn" id="gtx-methodology-btn" style="color:#ff8c42;">Methodology <span>▼</span></button>
+                <button class="toggle-btn gtx" id="gtx-methodology-btn">Methodology <span>▼</span></button>
                 <div class="toggle-content methodology-content" id="gtx-methodology">
                     <p><strong>1. Scale:</strong> The G‑Tension Index ranges from 0 (no geopolitical risk) to 100 (extreme geopolitical risk). It measures global tensions using AI‑driven sentiment analysis of foreign ministry statements, state media, and military briefings.</p>
                     <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong>.</p>
@@ -440,9 +487,9 @@
 
     <!-- PBOC -->
     <div id="pboc" class="tab-content">
-        <div class="index-header" style="color:#8b949e;">
+        <div class="index-header pboc">
             <span>PBOC</span>
-            <span class="sub" style="color:#8b949e;">COMING SOON</span>
+            <span class="sub">COMING SOON</span>
         </div>
         <div class="pboc-placeholder">
             <h2>🏛️</h2>
@@ -630,7 +677,7 @@
         }
     }
 
-    // Tabs
+    // ---- Tabs ----
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function() {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -647,7 +694,7 @@
         });
     });
 
-    // Toggles
+    // ---- Toggles ----
     toggleContent('ftn-sources-btn', 'ftn-sources');
     toggleContent('ftn-flip-btn', 'ftn-flip-content');
     toggleContent('ftn-market-btn', 'ftn-market');
@@ -661,7 +708,7 @@
     toggleContent('gtx-market-btn', 'gtx-market');
     toggleContent('gtx-methodology-btn', 'gtx-methodology');
 
-    // Initial load
+    // ---- Initial load ----
     fetchIndex('ftn', 'dovish');
     document.getElementById('ftn-data').dataset.loaded = 'true';
 </script>
