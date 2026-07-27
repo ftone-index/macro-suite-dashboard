@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #0d1117;
+            background: #000000;
             color: #c9d1d9;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             display: flex;
@@ -20,11 +20,12 @@
         .container {
             width: 100%;
             max-width: 720px;
-            background: #161b22;
+            background: #1a1a1a;
             padding: 24px 20px 40px;
             min-height: 100vh;
             border: none;
             border-radius: 0;
+            box-shadow: 0 0 40px rgba(255,255,255,0.02);
         }
 
         /* Tabs */
@@ -62,16 +63,22 @@
             font-size: 15px;
             font-weight: 600;
             color: #f0c040;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            padding-bottom: 10px;
+            padding: 10px 0;
             border-bottom: 2px solid #30363d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-shadow: 0 0 12px rgba(240, 192, 64, 0.15);
         }
         .index-header .sub {
             font-weight: 500;
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
             color: #f0c040;
+            text-shadow: 0 0 12px rgba(240, 192, 64, 0.15);
         }
 
         /* Sections */
@@ -121,14 +128,13 @@
             display: inline-block;
             font-size: 12px;
             font-weight: 500;
-            padding: 2px 10px;
-            border-radius: 8px;
+            padding: 2px 0;
             margin-bottom: 6px;
-            background: #1c2333;
             color: #8b949e;
+            background: transparent;
         }
 
-        /* Toggles (no emojis, unified font size) */
+        /* Toggles (unified font, size, colour) */
         .toggle-btn {
             background: none;
             border: none;
@@ -145,6 +151,11 @@
             align-items: center;
         }
         .toggle-btn:hover { color: #f5d66a; }
+        .toggle-btn-market {
+            color: #f0c040;
+            font-size: 14px;
+            font-weight: 500;
+        }
         .toggle-content {
             display: none;
             padding-top: 8px;
@@ -160,7 +171,7 @@
         .source-item a { color: #c9d1d9; text-decoration: none; }
         .source-item a:hover { text-decoration: underline; }
 
-        /* Market Expectation (no extra "Details" line) */
+        /* Market Expectation */
         .market-row {
             display: flex;
             justify-content: space-between;
@@ -173,7 +184,7 @@
         .market-row .label { color: #c9d1d9; }
         .market-row .value { font-weight: 500; color: #c9d1d9; }
 
-        /* Fed Rates (flat toggle, no card) */
+        /* Fed Rates */
         .rate-item {
             display: flex;
             justify-content: space-between;
@@ -183,7 +194,7 @@
             border-bottom: 1px solid #1c2333;
         }
         .rate-item:last-child { border-bottom: none; }
-        .rate-value { color: #f0c040; font-weight: 500; }
+        .rate-value { color: #c9d1d9; font-weight: 500; }
 
         /* Methodology */
         .methodology-content {
@@ -220,16 +231,15 @@
         .loading { color: #6b7a90; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
-        /* Desktop */
         @media (min-width: 721px) {
-            body { padding: 40px; align-items: center; background: #0d1117; }
+            body { padding: 40px; align-items: center; background: #000000; }
             .container {
                 max-width: 720px;
                 border-radius: 20px;
                 border: 1px solid #30363d;
                 min-height: auto;
                 padding: 40px 36px 48px;
-                background: #161b22;
+                background: #1a1a1a;
             }
             .dual-score { font-size: 48px; }
             .dual-score .arrow { font-size: 28px; }
@@ -250,7 +260,10 @@
 
     <!-- FTN -->
     <div id="ftn" class="tab-content active">
-        <div class="index-header">F‑Tone (FTN) <span class="sub">– FEDERAL RESERVE TONE INDEX</span></div>
+        <div class="index-header">
+            <span>F‑TONE (FTN)</span>
+            <span class="sub">FEDERAL RESERVE TONE INDEX</span>
+        </div>
         <div id="ftn-loading" class="loading">Loading…</div>
         <div id="ftn-data" style="display:none;">
 
@@ -275,10 +288,10 @@
 
             <div class="section">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                    <span style="font-weight:500; color:#f0c040; font-size:14px;">Market Expectation</span>
+                    <span class="toggle-btn-market">Market Expectation</span>
                     <span id="ftn-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
-                <button class="toggle-btn" id="ftn-market-btn" style="color:#8b949e; font-size:13px; padding-top:2px;">Sources <span>▼</span></button>
+                <button class="toggle-btn" id="ftn-market-btn" style="color:#8b949e; font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
                 <div class="toggle-content" id="ftn-market"></div>
             </div>
 
@@ -287,11 +300,14 @@
                 <div class="toggle-content methodology-content" id="ftn-methodology">
                     <p><strong>1. Scale:</strong> The F‑Tone Index ranges from 0 (extremely dovish) to 100 (extremely hawkish). It measures the Federal Reserve’s policy tone as expressed in official speeches, FOMC statements, and minutes, plus regional Fed speeches, testimony, and Fed blog posts.</p>
                     <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong> — the live score is the immediate average of today's document scores; the 7d avg is a 7‑day moving average.</p>
-                    <p><strong>3. Market Expectation:</strong> A companion score derived from Treasury yields and the US Dollar Index, showing what markets are pricing.</p>
-                    <p><strong>4. Fed policy rates:</strong> Shows the Fed Funds target range, IORB rate, and ON RRP rate for quick reference.</p>
-                    <p><strong>5. Confidence:</strong> HIGH, MEDIUM, or LOW based on the breadth of sources analysed and the total text volume.</p>
-                    <p><strong>6. Radical transparency:</strong> Every score is traceable to its source document. No black boxes.</p>
-                    <p><strong>7. Inclusive design:</strong> The colour pair used for the live and smoothed scores is carefully chosen to be clearly distinguishable for users with the most common form of colour vision deficiency (red‑green).</p>
+                    <p><strong>3. Qualitative label:</strong> The “Hawkish” / “Dovish” label shows in which segment of the 0–100 range the 7d avg is anchored. It is a quick visual and mnemonic reference for the score's segment. It does not imply a movement or a trend direction.</p>
+                    <p><strong>4. Persistent alert:</strong> If the live score moves <strong>5 points or more</strong> in the <strong>opposite direction</strong> of the smoothed score's movement (i.e., the 7d avg trend), a persistent alert (⚠️) appears next to the live score for up to 24 hours — as an early warning of a potential trend change.</p>
+                    <p><strong>5. Market Expectation:</strong> A companion score derived from Treasury yields and the US Dollar Index, showing what markets are pricing.</p>
+                    <p><strong>6. Fed policy rates:</strong> Shows the Fed Funds target range, IORB rate, and ON RRP rate for quick reference.</p>
+                    <p><strong>7. Confidence:</strong> HIGH, MEDIUM, or LOW based on the breadth of sources analysed and the total text volume.</p>
+                    <p><strong>8. Radical transparency:</strong> Every score is traceable to its source document. No black boxes.</p>
+                    <p><strong>9. Data availability:</strong> When a fresh index computation cannot be retrieved for any reason, the dashboard displays the most recent successfully computed reading, marked as ‘last reading’.</p>
+                    <p><strong>10. Inclusive design:</strong> The colour pair used for the live and smoothed scores is carefully chosen to be clearly distinguishable for users with the most common form of colour vision deficiency (red‑green).</p>
                 </div>
             </div>
 
@@ -308,7 +324,10 @@
 
     <!-- GIP -->
     <div id="gip" class="tab-content">
-        <div class="index-header" style="color:#3cc8ff;">G‑Pulse (GIP) <span class="sub" style="color:#3cc8ff;">– GLOBAL INFLATION PULSE INDEX</span></div>
+        <div class="index-header" style="color:#3cc8ff; text-shadow:0 0 12px rgba(60,200,255,0.12);">
+            <span>G‑PULSE (GIP)</span>
+            <span class="sub" style="color:#3cc8ff;">GLOBAL INFLATION PULSE INDEX</span>
+        </div>
         <div id="gip-loading" class="loading">Loading…</div>
         <div id="gip-data" style="display:none;">
             <div class="section">
@@ -333,7 +352,7 @@
                     <span style="font-weight:500; color:#3cc8ff; font-size:14px;">Market Expectation</span>
                     <span id="gip-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
-                <button class="toggle-btn" id="gip-market-btn" style="color:#8b949e; font-size:13px; padding-top:2px;">Sources <span>▼</span></button>
+                <button class="toggle-btn" id="gip-market-btn" style="color:#8b949e; font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
                 <div class="toggle-content" id="gip-market"></div>
             </div>
             <div class="section">
@@ -341,10 +360,13 @@
                 <div class="toggle-content methodology-content" id="gip-methodology">
                     <p><strong>1. Scale:</strong> The G‑Pulse Index ranges from 0 (extremely deflationary) to 100 (extremely inflationary). It measures global price pressures using AI‑driven sentiment analysis of earnings calls, ISM reports, BLS CPI releases, and shipping statements.</p>
                     <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong>.</p>
-                    <p><strong>3. Market Expectation:</strong> A companion score derived from breakeven inflation rates and commodity prices (gold, oil).</p>
-                    <p><strong>4. Confidence:</strong> HIGH, MEDIUM, or LOW based on source breadth and text volume.</p>
-                    <p><strong>5. Radical transparency:</strong> Every score is traceable to its source document.</p>
-                    <p><strong>6. Inclusive design:</strong> The colour pair is chosen to be clearly distinguishable for users with colour vision deficiency.</p>
+                    <p><strong>3. Qualitative label:</strong> The “Inflationary” / “Deflationary” label shows in which segment of the 0–100 range the 7d avg is anchored.</p>
+                    <p><strong>4. Persistent alert:</strong> If the live score moves <strong>5 points or more</strong> in the opposite direction of the smoothed trend, a persistent alert appears for up to 24 hours.</p>
+                    <p><strong>5. Market Expectation:</strong> A companion score derived from breakeven inflation rates and commodity prices (gold, oil).</p>
+                    <p><strong>6. Confidence:</strong> HIGH, MEDIUM, or LOW based on source breadth and text volume.</p>
+                    <p><strong>7. Radical transparency:</strong> Every score is traceable to its source document.</p>
+                    <p><strong>8. Data availability:</strong> When a fresh computation cannot be retrieved, the dashboard displays the most recent reading, marked as ‘last reading’.</p>
+                    <p><strong>9. Inclusive design:</strong> The colour pair is chosen to be clearly distinguishable for users with colour vision deficiency.</p>
                 </div>
             </div>
             <div class="meta">
@@ -360,7 +382,10 @@
 
     <!-- GTX -->
     <div id="gtx" class="tab-content">
-        <div class="index-header" style="color:#ff8c42;">G‑Tension (GTX) <span class="sub" style="color:#ff8c42;">– GEOPOLITICAL TEMPERATURE INDEX</span></div>
+        <div class="index-header" style="color:#ff8c42; text-shadow:0 0 12px rgba(255,140,66,0.12);">
+            <span>G‑TENSION (GTX)</span>
+            <span class="sub" style="color:#ff8c42;">GEOPOLITICAL TEMPERATURE INDEX</span>
+        </div>
         <div id="gtx-loading" class="loading">Loading…</div>
         <div id="gtx-data" style="display:none;">
             <div class="section">
@@ -385,7 +410,7 @@
                     <span style="font-weight:500; color:#ff8c42; font-size:14px;">Market Expectation</span>
                     <span id="gtx-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
-                <button class="toggle-btn" id="gtx-market-btn" style="color:#8b949e; font-size:13px; padding-top:2px;">Sources <span>▼</span></button>
+                <button class="toggle-btn" id="gtx-market-btn" style="color:#8b949e; font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
                 <div class="toggle-content" id="gtx-market"></div>
             </div>
             <div class="section">
@@ -393,10 +418,13 @@
                 <div class="toggle-content methodology-content" id="gtx-methodology">
                     <p><strong>1. Scale:</strong> The G‑Tension Index ranges from 0 (no geopolitical risk) to 100 (extreme geopolitical risk). It measures global tensions using AI‑driven sentiment analysis of foreign ministry statements, state media, and military briefings.</p>
                     <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong>.</p>
-                    <p><strong>3. Market Expectation:</strong> A companion score derived from VIX, gold prices, and defence sector ETF flows.</p>
-                    <p><strong>4. Confidence:</strong> HIGH, MEDIUM, or LOW based on source breadth and text volume.</p>
-                    <p><strong>5. Radical transparency:</strong> Every score is traceable to its source document.</p>
-                    <p><strong>6. Inclusive design:</strong> The colour pair is chosen to be clearly distinguishable for users with colour vision deficiency.</p>
+                    <p><strong>3. Qualitative label:</strong> The “High Risk” / “Low Risk” label shows in which segment of the 0–100 range the 7d avg is anchored.</p>
+                    <p><strong>4. Persistent alert:</strong> If the live score moves <strong>5 points or more</strong> in the opposite direction of the smoothed trend, a persistent alert appears for up to 24 hours.</p>
+                    <p><strong>5. Market Expectation:</strong> A companion score derived from VIX, gold prices, and defence sector ETF flows.</p>
+                    <p><strong>6. Confidence:</strong> HIGH, MEDIUM, or LOW based on source breadth and text volume.</p>
+                    <p><strong>7. Radical transparency:</strong> Every score is traceable to its source document.</p>
+                    <p><strong>8. Data availability:</strong> When a fresh computation cannot be retrieved, the dashboard displays the most recent reading, marked as ‘last reading’.</p>
+                    <p><strong>9. Inclusive design:</strong> The colour pair is chosen to be clearly distinguishable for users with colour vision deficiency.</p>
                 </div>
             </div>
             <div class="meta">
@@ -412,7 +440,10 @@
 
     <!-- PBOC -->
     <div id="pboc" class="tab-content">
-        <div class="index-header" style="color:#8b949e;">PBOC <span class="sub" style="color:#8b949e;">– COMING SOON</span></div>
+        <div class="index-header" style="color:#8b949e;">
+            <span>PBOC</span>
+            <span class="sub" style="color:#8b949e;">COMING SOON</span>
+        </div>
         <div class="pboc-placeholder">
             <h2>🏛️</h2>
             <p>The People's Bank of China Tone Index is currently in development.</p>
