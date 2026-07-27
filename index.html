@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Macro Suite – FTN · GIP · GTX · PBOC</title>
     <style>
-        /* ----- RESET & BASE ----- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #0d1117;
@@ -28,7 +27,7 @@
             border-radius: 0;
         }
 
-        /* ----- TABS (FULL WIDTH) ----- */
+        /* ----- TABS ----- */
         .tabs {
             display: flex;
             gap: 0;
@@ -53,21 +52,17 @@
         }
         .tab:last-child { border-right: none; }
         .tab:hover { color: #c9d1d9; background: #1c2333; }
-        .tab.active {
-            color: #f0c040;
-            background: #1c2333;
-        }
+        .tab.active { color: #f0c040; background: #1c2333; }
         .tab.active-gip { color: #3cc8ff; }
         .tab.active-gtx { color: #ff8c42; }
         .tab.active-pboc { color: #8b949e; }
 
-        /* ----- TAB CONTENT ----- */
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* ----- HEADER (SINGLE LINE) ----- */
+        /* ----- HEADER ----- */
         .index-header {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: #f0c040;
             letter-spacing: 0.04em;
@@ -75,9 +70,14 @@
             padding-bottom: 6px;
             border-bottom: 1px solid #30363d;
         }
-        .index-header .sub { color: #8b949e; font-weight: 400; font-size: 13px; }
+        .index-header .sub {
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #f0c040;
+        }
 
-        /* ----- THREE SECTIONS ----- */
+        /* ----- SECTIONS ----- */
         .section {
             margin-bottom: 16px;
             padding-bottom: 12px;
@@ -85,7 +85,7 @@
         }
         .section:last-child { border-bottom: none; margin-bottom: 0; }
 
-        /* ----- DUAL SCORE ----- */
+        /* ----- DUAL SCORE (WHITE) ----- */
         .dual-score {
             font-size: 40px;
             font-weight: 600;
@@ -95,8 +95,8 @@
             letter-spacing: -0.02em;
             color: #ffffff;
         }
-        .dual-score .live { color: #f0c040; }
-        .dual-score .smoothed { color: #8b9dc0; }
+        .dual-score .live { color: #ffffff; }
+        .dual-score .smoothed { color: #ffffff; }
         .dual-score .arrow {
             font-size: 24px;
             color: #6b7a90;
@@ -131,7 +131,7 @@
             color: #8b949e;
         }
 
-        /* ----- COLLAPSIBLE SECTIONS ----- */
+        /* ----- TOGGLES ----- */
         .toggle-btn {
             background: none;
             border: none;
@@ -157,28 +157,34 @@
         }
         .toggle-content.open { display: block; }
 
-        /* ----- MARKET ROW ----- */
+        /* ----- SOURCES (WHITE + GREY) ----- */
+        .source-item { padding: 2px 0; font-size: 13px; color: #ffffff; }
+        .source-item .type { color: #6b7a90; }
+        .source-item a { color: #ffffff; text-decoration: none; }
+        .source-item a:hover { text-decoration: underline; }
+
+        /* ----- MARKET ROW (BOTH SIDES WHITE) ----- */
         .market-row {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             padding: 3px 0;
             font-size: 13px;
-            color: #c9d1d9;
+            color: #ffffff;
             border-bottom: 1px solid #1c2333;
         }
-        .market-row .label { color: #8b949e; }
+        .market-row .label { color: #ffffff; }
         .market-row .value { font-weight: 500; color: #ffffff; }
 
-        /* ----- FLIP CARD ----- */
+        /* ----- FLIP CARD (FULL SECTION) ----- */
         .flip-card-mini {
-            margin-top: 6px;
             padding: 10px 14px;
             background: #1c2333;
             border-radius: 10px;
             border: 1px solid #30363d;
             cursor: pointer;
             transition: 0.2s;
+            margin-top: 4px;
         }
         .flip-card-mini:hover { border-color: #4a5568; }
         .flip-card-mini .front,
@@ -187,7 +193,7 @@
             justify-content: space-between;
             font-size: 13px;
         }
-        .flip-card-mini .back { display: none; }
+        .flip-card-mini .back { display: none; flex-wrap: wrap; }
         .flip-card-mini.flipped .front { display: none; }
         .flip-card-mini.flipped .back { display: flex; flex-wrap: wrap; }
         .flip-card-mini .rate-item {
@@ -200,6 +206,15 @@
         }
         .flip-card-mini .rate-value { color: #f0c040; font-weight: 500; }
 
+        /* ----- METHODOLOGY (RESTORED) ----- */
+        .methodology-content {
+            font-size: 13px;
+            color: #c9d1d9;
+            line-height: 1.6;
+        }
+        .methodology-content p { margin-bottom: 8px; }
+        .methodology-content strong { color: #f0c040; }
+
         /* ----- META ----- */
         .meta {
             font-size: 11px;
@@ -211,30 +226,21 @@
         .meta a { color: #58a6ff; text-decoration: none; }
         .meta a:hover { text-decoration: underline; }
 
-        /* ----- PBOC PLACEHOLDER ----- */
+        /* ----- PBOC ----- */
         .pboc-placeholder {
             text-align: center;
             padding: 30px 20px;
             color: #8b949e;
         }
-        .pboc-placeholder h2 {
-            color: #8b949e;
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
+        .pboc-placeholder h2 { color: #8b949e; font-size: 20px; margin-bottom: 6px; }
         .pboc-placeholder p { font-size: 14px; line-height: 1.6; }
 
         /* ----- LOADING / ERROR ----- */
         .loading, .error { font-size: 14px; padding: 16px 0; text-align: center; }
         .error { color: #f26b6b; }
         .loading { color: #6b7a90; animation: pulse 1.5s infinite; }
-        @keyframes pulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
-        }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
-        /* ----- RESPONSIVE (DESKTOP) ----- */
         @media (min-width: 721px) {
             body { padding: 40px; align-items: center; background: #0d1117; }
             .container {
@@ -254,7 +260,7 @@
 
 <div class="container" id="app">
 
-    <!-- TABS (FULL WIDTH) -->
+    <!-- TABS -->
     <div class="tabs">
         <button class="tab active" data-tab="ftn">FTN</button>
         <button class="tab" data-tab="gip">GIP</button>
@@ -264,7 +270,7 @@
 
     <!-- FTN -->
     <div id="ftn" class="tab-content active">
-        <div class="index-header">F‑Tone (FTN) <span class="sub">– Federal Reserve Tone Index</span></div>
+        <div class="index-header">F‑Tone (FTN) <span class="sub">– FEDERAL RESERVE TONE INDEX</span></div>
         <div id="ftn-loading" class="loading">Loading…</div>
         <div id="ftn-data" style="display:none;">
 
@@ -279,22 +285,41 @@
                 <div class="toggle-content" id="ftn-sources"></div>
             </div>
 
-            <!-- SECTION 2: Fed Rates (Flip‑card) -->
+            <!-- SECTION 2: Fed Rates -->
             <div class="section">
-                <div class="flip-card-mini" id="ftn-flip">
-                    <div class="front">↻ Click to see Fed rates</div>
-                    <div class="back">
-                        <div class="rate-item"><span>Fed Funds</span><span class="rate-value" id="ftn-fed-funds">--</span></div>
-                        <div class="rate-item"><span>IORB</span><span class="rate-value" id="ftn-iorb">--</span></div>
-                        <div class="rate-item"><span>ON RRP</span><span class="rate-value" id="ftn-onrrp">--</span></div>
+                <button class="toggle-btn" id="ftn-flip-btn">💲 Fed Policy Rates <span>▼</span></button>
+                <div class="toggle-content" id="ftn-flip-content">
+                    <div class="flip-card-mini" id="ftn-flip">
+                        <div class="front">Click to see Fed rates</div>
+                        <div class="back">
+                            <div class="rate-item"><span>Fed Funds</span><span class="rate-value" id="ftn-fed-funds">--</span></div>
+                            <div class="rate-item"><span>IORB</span><span class="rate-value" id="ftn-iorb">--</span></div>
+                            <div class="rate-item"><span>ON RRP</span><span class="rate-value" id="ftn-onrrp">--</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- SECTION 3: Market Expectation -->
             <div class="section">
-                <button class="toggle-btn" id="ftn-market-btn">📊 Market Expectation <span>▼</span></button>
+                <div id="ftn-market-header" style="margin-bottom:4px;">
+                    <span style="font-weight:500; color:#f0c040;">📊 Market Expectation</span>
+                    <span id="ftn-market-score" style="font-weight:500; color:#ffffff; margin-left:8px;"></span>
+                </div>
+                <button class="toggle-btn" id="ftn-market-btn" style="color:#8b949e; font-size:12px;">Details <span>▼</span></button>
                 <div class="toggle-content" id="ftn-market"></div>
+            </div>
+
+            <!-- SECTION 4: Methodology -->
+            <div class="section">
+                <button class="toggle-btn" id="ftn-methodology-btn">📐 Methodology <span>▼</span></button>
+                <div class="toggle-content methodology-content" id="ftn-methodology">
+                    <p><strong>1. Scale:</strong> The F‑Tone Index ranges from 0 (extremely dovish) to 100 (extremely hawkish). It measures the Federal Reserve’s policy tone as expressed in official speeches, FOMC statements, and minutes, plus regional Fed speeches, testimony, and Fed blog posts.</p>
+                    <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong> — the live score is the immediate average of today's document scores; the 7d avg is a 7‑day moving average.</p>
+                    <p><strong>3. Market Expectation:</strong> A companion score derived from Treasury yields and the US Dollar Index, showing what markets are pricing.</p>
+                    <p><strong>4. Fed policy rates:</strong> The flip‑card shows the Fed Funds target range, IORB rate, and ON RRP rate for quick reference.</p>
+                    <p><strong>5. Confidence:</strong> HIGH, MEDIUM, or LOW based on the breadth of sources analysed and the total text volume.</p>
+                </div>
             </div>
 
             <div class="meta">
@@ -308,9 +333,9 @@
         <div id="ftn-error" class="error" style="display:none;">Unable to load data. Please try again later.</div>
     </div>
 
-    <!-- GIP -->
+    <!-- GIP (same structure, teal) -->
     <div id="gip" class="tab-content">
-        <div class="index-header" style="color:#3cc8ff;">G‑Pulse (GIP) <span class="sub">– Global Inflation Pulse Index</span></div>
+        <div class="index-header" style="color:#3cc8ff;">G‑Pulse (GIP) <span class="sub" style="color:#3cc8ff;">– GLOBAL INFLATION PULSE INDEX</span></div>
         <div id="gip-loading" class="loading">Loading…</div>
         <div id="gip-data" style="display:none;">
             <div class="section">
@@ -323,18 +348,34 @@
                 <div class="toggle-content" id="gip-sources"></div>
             </div>
             <div class="section">
-                <div class="flip-card-mini" id="gip-flip">
-                    <div class="front">↻ Click to see inflation drivers</div>
-                    <div class="back">
-                        <div class="rate-item"><span>CPI (YoY)</span><span class="rate-value" id="gip-cpi">--</span></div>
-                        <div class="rate-item"><span>Core PCE</span><span class="rate-value" id="gip-pce">--</span></div>
-                        <div class="rate-item"><span>Breakeven 5y</span><span class="rate-value" id="gip-breakeven">--</span></div>
+                <button class="toggle-btn" id="gip-flip-btn" style="color:#3cc8ff;">💲 Inflation Drivers <span>▼</span></button>
+                <div class="toggle-content" id="gip-flip-content">
+                    <div class="flip-card-mini" id="gip-flip">
+                        <div class="front">Click to see drivers</div>
+                        <div class="back">
+                            <div class="rate-item"><span>CPI (YoY)</span><span class="rate-value" id="gip-cpi">--</span></div>
+                            <div class="rate-item"><span>Core PCE</span><span class="rate-value" id="gip-pce">--</span></div>
+                            <div class="rate-item"><span>Breakeven 5y</span><span class="rate-value" id="gip-breakeven">--</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="section">
-                <button class="toggle-btn" id="gip-market-btn" style="color:#3cc8ff;">📊 Market Expectation <span>▼</span></button>
+                <div id="gip-market-header" style="margin-bottom:4px;">
+                    <span style="font-weight:500; color:#3cc8ff;">📊 Market Expectation</span>
+                    <span id="gip-market-score" style="font-weight:500; color:#ffffff; margin-left:8px;"></span>
+                </div>
+                <button class="toggle-btn" id="gip-market-btn" style="color:#8b949e; font-size:12px;">Details <span>▼</span></button>
                 <div class="toggle-content" id="gip-market"></div>
+            </div>
+            <div class="section">
+                <button class="toggle-btn" id="gip-methodology-btn" style="color:#3cc8ff;">📐 Methodology <span>▼</span></button>
+                <div class="toggle-content methodology-content" id="gip-methodology">
+                    <p><strong>1. Scale:</strong> The G‑Pulse Index ranges from 0 (extremely deflationary) to 100 (extremely inflationary). It measures global price pressures using AI‑driven sentiment analysis of earnings calls, ISM reports, BLS CPI releases, and shipping statements.</p>
+                    <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong>.</p>
+                    <p><strong>3. Market Expectation:</strong> A companion score derived from breakeven inflation rates and commodity prices (gold, oil).</p>
+                    <p><strong>4. Confidence:</strong> HIGH, MEDIUM, or LOW based on source breadth and text volume.</p>
+                </div>
             </div>
             <div class="meta">
                 <span id="gip-timestamp"></span>
@@ -347,9 +388,9 @@
         <div id="gip-error" class="error" style="display:none;">Unable to load data. Please try again later.</div>
     </div>
 
-    <!-- GTX -->
+    <!-- GTX (same structure, orange) -->
     <div id="gtx" class="tab-content">
-        <div class="index-header" style="color:#ff8c42;">G‑Tension (GTX) <span class="sub">– Geopolitical Temperature Index</span></div>
+        <div class="index-header" style="color:#ff8c42;">G‑Tension (GTX) <span class="sub" style="color:#ff8c42;">– GEOPOLITICAL TEMPERATURE INDEX</span></div>
         <div id="gtx-loading" class="loading">Loading…</div>
         <div id="gtx-data" style="display:none;">
             <div class="section">
@@ -362,18 +403,34 @@
                 <div class="toggle-content" id="gtx-sources"></div>
             </div>
             <div class="section">
-                <div class="flip-card-mini" id="gtx-flip">
-                    <div class="front">↻ Click to see risk indicators</div>
-                    <div class="back">
-                        <div class="rate-item"><span>VIX</span><span class="rate-value" id="gtx-vix">--</span></div>
-                        <div class="rate-item"><span>Gold Change</span><span class="rate-value" id="gtx-gold">--</span></div>
-                        <div class="rate-item"><span>Defence ETF</span><span class="rate-value" id="gtx-defence">--</span></div>
+                <button class="toggle-btn" id="gtx-flip-btn" style="color:#ff8c42;">💲 Risk Indicators <span>▼</span></button>
+                <div class="toggle-content" id="gtx-flip-content">
+                    <div class="flip-card-mini" id="gtx-flip">
+                        <div class="front">Click to see indicators</div>
+                        <div class="back">
+                            <div class="rate-item"><span>VIX</span><span class="rate-value" id="gtx-vix">--</span></div>
+                            <div class="rate-item"><span>Gold Change</span><span class="rate-value" id="gtx-gold">--</span></div>
+                            <div class="rate-item"><span>Defence ETF</span><span class="rate-value" id="gtx-defence">--</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="section">
-                <button class="toggle-btn" id="gtx-market-btn" style="color:#ff8c42;">📊 Market Expectation <span>▼</span></button>
+                <div id="gtx-market-header" style="margin-bottom:4px;">
+                    <span style="font-weight:500; color:#ff8c42;">📊 Market Expectation</span>
+                    <span id="gtx-market-score" style="font-weight:500; color:#ffffff; margin-left:8px;"></span>
+                </div>
+                <button class="toggle-btn" id="gtx-market-btn" style="color:#8b949e; font-size:12px;">Details <span>▼</span></button>
                 <div class="toggle-content" id="gtx-market"></div>
+            </div>
+            <div class="section">
+                <button class="toggle-btn" id="gtx-methodology-btn" style="color:#ff8c42;">📐 Methodology <span>▼</span></button>
+                <div class="toggle-content methodology-content" id="gtx-methodology">
+                    <p><strong>1. Scale:</strong> The G‑Tension Index ranges from 0 (no geopolitical risk) to 100 (extreme geopolitical risk). It measures global tensions using AI‑driven sentiment analysis of foreign ministry statements, state media, and military briefings.</p>
+                    <p><strong>2. Dual display:</strong> The headline shows <strong>live → 7d avg</strong>.</p>
+                    <p><strong>3. Market Expectation:</strong> A companion score derived from VIX, gold prices, and defence sector ETF flows.</p>
+                    <p><strong>4. Confidence:</strong> HIGH, MEDIUM, or LOW based on source breadth and text volume.</p>
+                </div>
             </div>
             <div class="meta">
                 <span id="gtx-timestamp"></span>
@@ -388,7 +445,7 @@
 
     <!-- PBOC -->
     <div id="pboc" class="tab-content">
-        <div class="index-header" style="color:#8b949e;">PBOC <span class="sub">– Coming soon</span></div>
+        <div class="index-header" style="color:#8b949e;">PBOC <span class="sub" style="color:#8b949e;">– COMING SOON</span></div>
         <div class="pboc-placeholder">
             <h2>🏛️</h2>
             <p>The People's Bank of China Tone Index is currently in development.</p>
@@ -402,26 +459,22 @@
 </div>
 
 <script>
-    // ---- API ENDPOINTS ----
     const API = {
         ftn: 'https://ftn-index.onrender.com/api/ftn_latest',
         gip: 'https://gip-index.onrender.com/api/gip_latest',
         gtx: 'https://gtx-index.onrender.com/api/gtx_latest'
     };
-
     const MARKET_API = {
         ftn: 'https://ftn-market.onrender.com/api/market_ftn',
         gip: 'https://gip-index.onrender.com/api/market_gip',
         gtx: 'https://gtx-index.onrender.com/api/market_gtx'
     };
-
     const RATES_API = {
         ftn: 'https://ftn-market.onrender.com/api/fed_rates',
         gip: 'https://gip-index.onrender.com/api/gip_drivers',
         gtx: 'https://gtx-index.onrender.com/api/gtx_drivers'
     };
 
-    // ---- HELPERS ----
     function getLabel(score, scale) {
         if (scale === 'dovish') {
             if (score <= 20) return 'Extremely Dovish';
@@ -453,18 +506,15 @@
         return d.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) + ' UTC';
     }
 
-    // ---- RENDER FUNCTIONS ----
     function renderIndex(data, id, scale) {
         const el = (id) => document.getElementById(id);
         const score = data.score;
         const raw = data.raw_score !== undefined ? data.raw_score : score;
         const change = parseFloat(data.change) || 0;
-        const label = getLabel(score, scale);
 
         el(id + '-dual').innerHTML = `<span class="live">${raw.toFixed(1)}</span> <span class="arrow">→</span> <span class="smoothed">${score.toFixed(1)}</span>`;
         el(id + '-formula').innerText = 'live → 7d avg';
-        el(id + '-label').innerText = label;
-        el(id + '-label').style.color = '#ffffff';
+        el(id + '-label').innerText = getLabel(score, scale);
         const changeEl = el(id + '-change');
         if (change === 0) {
             changeEl.innerHTML = `— ${Math.abs(change).toFixed(1)}`;
@@ -481,7 +531,7 @@
         const sourcesEl = el(id + '-sources');
         if (sources.length) {
             sourcesEl.innerHTML = sources.map(s =>
-                `<div style="padding:2px 0; font-size:13px; color:#c9d1d9;"><a href="${s.url}" target="_blank" style="color:#f0c040;">${s.title}</a> <span style="color:#6b7a90;">(${s.type})</span></div>`
+                `<div class="source-item"><a href="${s.url}" target="_blank">${s.title}</a> <span class="type">(${s.type})</span></div>`
             ).join('');
         } else {
             sourcesEl.innerHTML = '<div style="color:#6b7a90; font-size:13px;">No sources available.</div>';
@@ -495,12 +545,15 @@
 
     function renderMarket(data, id) {
         const el = (id) => document.getElementById(id);
+        const scoreEl = document.getElementById(id + '-market-score');
         if (!data || data.error) {
+            scoreEl.innerText = '—';
             el(id + '-market').innerHTML = '<div style="color:#6b7a90; font-size:13px;">Market data unavailable.</div>';
             return;
         }
         const score = data.score;
         const label = data.label || '';
+        scoreEl.innerText = `${score.toFixed(1)} · ${label}`;
         const comp = data.components || {};
         let details = '';
         if (comp.y2 !== undefined) details += `<div class="market-row"><span class="label">2‑year yield</span><span class="value">${comp.y2.toFixed(2)}%</span></div>`;
@@ -511,19 +564,14 @@
         if (comp.oil_change !== undefined) details += `<div class="market-row"><span class="label">Oil change</span><span class="value">${comp.oil_change > 0 ? '+' : ''}${comp.oil_change.toFixed(2)}%</span></div>`;
         if (comp.vix_change !== undefined) details += `<div class="market-row"><span class="label">VIX change</span><span class="value">${comp.vix_change > 0 ? '+' : ''}${comp.vix_change.toFixed(2)}%</span></div>`;
         if (comp.defence_change !== undefined) details += `<div class="market-row"><span class="label">Defence ETF</span><span class="value">${comp.defence_change > 0 ? '+' : ''}${comp.defence_change.toFixed(2)}%</span></div>`;
-        if (comp.ita_change !== undefined) details += `<div class="market-row"><span class="label">ITA change</span><span class="value">${comp.ita_change > 0 ? '+' : ''}${comp.ita_change.toFixed(2)}%</span></div>`;
-
-        el(id + '-market').innerHTML = `
-            <div class="market-row"><span class="label">Score</span><span class="value">${score.toFixed(1)} · ${label}</span></div>
-            ${details}
-        `;
+        el(id + '-market').innerHTML = details || '<div style="color:#6b7a90; font-size:13px;">No additional market data available.</div>';
     }
 
     function renderFlip(data, id, type) {
         const el = (id) => document.getElementById(id);
         if (!data || data.error) {
-            const els = [id + '-fed-funds', id + '-iorb', id + '-onrrp', id + '-cpi', id + '-pce', id + '-breakeven', id + '-vix', id + '-gold', id + '-defence'];
-            els.forEach(e => { if (document.getElementById(e)) document.getElementById(e).innerText = '--'; });
+            const ids = [id + '-fed-funds', id + '-iorb', id + '-onrrp', id + '-cpi', id + '-pce', id + '-breakeven', id + '-vix', id + '-gold', id + '-defence'];
+            ids.forEach(e => { if (document.getElementById(e)) document.getElementById(e).innerText = '--'; });
             return;
         }
         if (type === 'ftn') {
@@ -541,7 +589,18 @@
         }
     }
 
-    // ---- FETCH FUNCTIONS ----
+    function toggleContent(btnId, contentId) {
+        const btn = document.getElementById(btnId);
+        const content = document.getElementById(contentId);
+        if (btn && content) {
+            btn.addEventListener('click', function() {
+                content.classList.toggle('open');
+                const span = this.querySelector('span');
+                if (span) span.innerText = content.classList.contains('open') ? '▲' : '▼';
+            });
+        }
+    }
+
     async function fetchIndex(id, scale) {
         const el = (id) => document.getElementById(id);
         el(id + '-loading').style.display = 'block';
@@ -573,7 +632,7 @@
         }
     }
 
-    // ---- TAB SWITCHING ----
+    // Tab switching
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function() {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -590,29 +649,30 @@
         });
     });
 
-    // ---- TOGGLE BUTTONS ----
-    document.querySelectorAll('.toggle-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            if (content && content.classList.contains('toggle-content')) {
-                content.classList.toggle('open');
-                const span = this.querySelector('span');
-                if (span) span.innerText = content.classList.contains('open') ? '▲' : '▼';
-            }
-        });
-    });
+    // Toggles
+    toggleContent('ftn-sources-btn', 'ftn-sources');
+    toggleContent('ftn-flip-btn', 'ftn-flip-content');
+    toggleContent('ftn-market-btn', 'ftn-market');
+    toggleContent('ftn-methodology-btn', 'ftn-methodology');
+    toggleContent('gip-sources-btn', 'gip-sources');
+    toggleContent('gip-flip-btn', 'gip-flip-content');
+    toggleContent('gip-market-btn', 'gip-market');
+    toggleContent('gip-methodology-btn', 'gip-methodology');
+    toggleContent('gtx-sources-btn', 'gtx-sources');
+    toggleContent('gtx-flip-btn', 'gtx-flip-content');
+    toggleContent('gtx-market-btn', 'gtx-market');
+    toggleContent('gtx-methodology-btn', 'gtx-methodology');
 
-    // ---- FLIP CARDS ----
+    // Flip cards
     document.querySelectorAll('.flip-card-mini').forEach(card => {
         card.addEventListener('click', function() {
             this.classList.toggle('flipped');
         });
     });
 
-    // ---- INITIAL LOAD (FTN) ----
+    // Initial load
     fetchIndex('ftn', 'dovish');
     document.getElementById('ftn-data').dataset.loaded = 'true';
 </script>
-
 </body>
 </html>
