@@ -127,7 +127,7 @@
             font-weight: 600;
             line-height: 1.2;
             white-space: nowrap;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             letter-spacing: -0.02em;
             color: #c9d1d9;
         }
@@ -139,38 +139,42 @@
             margin: 0 4px;
             vertical-align: middle;
         }
+
+        /* ----- FORMULA & CONFIDENCE (Consistent) ----- */
         .formula {
             font-size: 12px;
-            color: #6b7a90;
-            margin-bottom: 6px;
+            font-weight: 400;
+            color: #8b949e;
+            margin-bottom: 4px;
         }
+        .confidence {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 400;
+            padding: 0;
+            margin-bottom: 4px;
+            color: #8b949e;
+            background: transparent;
+        }
+
         .label {
             font-size: 17px;
             font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             color: #c9d1d9;
         }
         .change {
             font-size: 18px;
             font-weight: 500;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             color: #c9d1d9;
         }
-        .confidence {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 500;
-            padding: 2px 0;
-            margin-bottom: 6px;
-            color: #8b949e;
-            background: transparent;
-        }
 
-        /* ----- TOGGLES (Unified Gold Arrows) ----- */
+        /* ----- TOGGLES (Label Grey, Arrows Accent) ----- */
         .toggle-btn {
             background: none;
             border: none;
-            color: #f0c040;
+            color: #8b949e;
             font-size: 14px;
             font-weight: 500;
             padding: 8px 0 4px 0;
@@ -182,21 +186,26 @@
             justify-content: space-between;
             align-items: center;
         }
-        .toggle-btn:hover { color: #f5d66a; }
+        .toggle-btn:hover {
+            color: #c9d1d9;
+        }
         .toggle-btn span {
             color: #f0c040;
         }
-        .toggle-btn-market {
-            color: #f0c040;
-            font-size: 14px;
-            font-weight: 500;
-        }
         /* GIP toggle override */
-        .toggle-btn.gip { color: #3cc8ff; }
-        .toggle-btn.gip span { color: #3cc8ff; }
+        .toggle-btn.gip {
+            color: #8b949e;
+        }
+        .toggle-btn.gip span {
+            color: #3cc8ff;
+        }
         /* GTX toggle override */
-        .toggle-btn.gtx { color: #ff8c42; }
-        .toggle-btn.gtx span { color: #ff8c42; }
+        .toggle-btn.gtx {
+            color: #8b949e;
+        }
+        .toggle-btn.gtx span {
+            color: #ff8c42;
+        }
 
         .toggle-content {
             display: none;
@@ -207,36 +216,71 @@
         }
         .toggle-content.open { display: block; }
 
-        /* ----- SOURCES ----- */
-        .source-item { padding: 3px 0; font-size: 13px; color: #c9d1d9; }
-        .source-item .type { color: #6b7a90; }
-        .source-item a { color: #c9d1d9; text-decoration: none; }
-        .source-item a:hover { text-decoration: underline; }
+        /* ----- SOURCES, MARKET, RATES (Consistent) ----- */
+        .source-item {
+            padding: 3px 0;
+            font-size: 13px;
+            font-weight: 400;
+            color: #c9d1d9;
+        }
+        .source-item a {
+            color: #c9d1d9;
+            text-decoration: none;
+        }
+        .source-item a:hover {
+            text-decoration: underline;
+        }
+        .source-item .type {
+            color: #8b949e;
+            font-size: 12px;
+            font-weight: 400;
+        }
 
-        /* ----- MARKET EXPECTATION ----- */
         .market-row {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             padding: 4px 0;
             font-size: 13px;
+            font-weight: 400;
             color: #c9d1d9;
             border-bottom: 1px solid #1c2333;
         }
-        .market-row .label { color: #c9d1d9; }
-        .market-row .value { font-weight: 500; color: #c9d1d9; }
+        .market-row .label {
+            color: #c9d1d9;
+            font-size: 13px;
+            font-weight: 400;
+        }
+        .market-row .value {
+            font-weight: 400;
+            color: #c9d1d9;
+            font-size: 13px;
+        }
 
-        /* ----- RATES / DRIVERS ----- */
         .rate-item {
             display: flex;
             justify-content: space-between;
             padding: 3px 0;
             font-size: 13px;
+            font-weight: 400;
             color: #c9d1d9;
             border-bottom: 1px solid #1c2333;
         }
-        .rate-item:last-child { border-bottom: none; }
-        .rate-value { color: #c9d1d9; font-weight: 500; }
+        .rate-item:last-child {
+            border-bottom: none;
+        }
+        .rate-value {
+            color: #c9d1d9;
+            font-weight: 400;
+            font-size: 13px;
+        }
+
+        /* ----- MARKET EXPECTATION LABEL (Grey) ----- */
+        .market-label {
+            color: #8b949e;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
         /* ----- METHODOLOGY ----- */
         .methodology-content {
@@ -335,7 +379,7 @@
 
             <div class="section">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                    <span class="toggle-btn-market">Market Expectation</span>
+                    <span class="market-label">Market Expectation</span>
                     <span id="ftn-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
                 <button class="toggle-btn" id="ftn-market-btn" style="font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
@@ -396,7 +440,7 @@
             </div>
             <div class="section">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                    <span style="font-weight:500; color:#3cc8ff; font-size:14px;">Market Expectation</span>
+                    <span class="market-label">Market Expectation</span>
                     <span id="gip-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
                 <button class="toggle-btn gip" id="gip-market-btn" style="font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
@@ -454,7 +498,7 @@
             </div>
             <div class="section">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                    <span style="font-weight:500; color:#ff8c42; font-size:14px;">Market Expectation</span>
+                    <span class="market-label">Market Expectation</span>
                     <span id="gtx-market-score" style="font-weight:500; color:#c9d1d9; font-size:14px;"></span>
                 </div>
                 <button class="toggle-btn gtx" id="gtx-market-btn" style="font-size:14px; font-weight:500; padding-top:2px;">Sources <span>▼</span></button>
