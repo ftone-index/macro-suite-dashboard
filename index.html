@@ -15,64 +15,75 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding: 16px;
+            padding: 0;
+            margin: 0;
         }
         .container {
-            max-width: 600px;
             width: 100%;
+            max-width: 720px;
             background: #161b22;
-            border-radius: 20px;
-            padding: 24px 20px 40px;
-            border: 1px solid #30363d;
-            min-height: 90vh;
+            padding: 20px 16px 32px;
+            min-height: 100vh;
+            border: none;
+            border-radius: 0;
         }
 
-        /* ----- TABS ----- */
+        /* ----- TABS (FULL WIDTH) ----- */
         .tabs {
             display: flex;
-            gap: 2px;
+            gap: 0;
             margin-bottom: 20px;
             border-bottom: 1px solid #30363d;
-            padding-bottom: 8px;
-            overflow-x: auto;
+            padding-bottom: 0;
+            width: 100%;
         }
         .tab {
+            flex: 1;
             background: none;
             border: none;
             color: #8b949e;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 10px 0;
             cursor: pointer;
-            white-space: nowrap;
-            transition: 0.2s;
+            text-align: center;
             font-family: inherit;
+            border-right: 1px solid #30363d;
+            transition: 0.2s;
         }
-        .tab:hover { color: #c9d1d9; }
+        .tab:last-child { border-right: none; }
+        .tab:hover { color: #c9d1d9; background: #1c2333; }
         .tab.active {
             color: #f0c040;
             background: #1c2333;
         }
+        .tab.active-gip { color: #3cc8ff; }
+        .tab.active-gtx { color: #ff8c42; }
+        .tab.active-pboc { color: #8b949e; }
 
         /* ----- TAB CONTENT ----- */
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* ----- SUITE HEADER ----- */
-        .suite-header {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #8b949e;
-            margin-bottom: 2px;
-        }
-        .index-name {
-            font-size: 16px;
+        /* ----- HEADER (SINGLE LINE) ----- */
+        .index-header {
+            font-size: 15px;
             font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 14px;
+            color: #f0c040;
+            letter-spacing: 0.04em;
+            margin-bottom: 16px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #30363d;
         }
+        .index-header .sub { color: #8b949e; font-weight: 400; font-size: 13px; }
+
+        /* ----- THREE SECTIONS ----- */
+        .section {
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #1c2333;
+        }
+        .section:last-child { border-bottom: none; margin-bottom: 0; }
 
         /* ----- DUAL SCORE ----- */
         .dual-score {
@@ -82,6 +93,7 @@
             white-space: nowrap;
             margin-bottom: 2px;
             letter-spacing: -0.02em;
+            color: #ffffff;
         }
         .dual-score .live { color: #f0c040; }
         .dual-score .smoothed { color: #8b9dc0; }
@@ -96,17 +108,17 @@
             color: #6b7a90;
             margin-bottom: 4px;
         }
-
-        /* ----- LABEL, CHANGE, CONFIDENCE ----- */
         .label {
             font-size: 16px;
             font-weight: 500;
             margin-bottom: 2px;
+            color: #ffffff;
         }
         .change {
             font-size: 18px;
             font-weight: 500;
             margin-bottom: 4px;
+            color: #c9d1d9;
         }
         .confidence {
             display: inline-block;
@@ -114,7 +126,7 @@
             font-weight: 500;
             padding: 2px 10px;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 4px;
             background: #1c2333;
             color: #8b949e;
         }
@@ -124,14 +136,12 @@
             background: none;
             border: none;
             color: #f0c040;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             padding: 6px 0;
             cursor: pointer;
             width: 100%;
             text-align: left;
-            border-bottom: 1px solid #30363d;
-            margin-top: 10px;
             font-family: inherit;
             display: flex;
             justify-content: space-between;
@@ -147,7 +157,7 @@
         }
         .toggle-content.open { display: block; }
 
-        /* ----- MARKET EXPECTATION ----- */
+        /* ----- MARKET ROW ----- */
         .market-row {
             display: flex;
             justify-content: space-between;
@@ -157,12 +167,12 @@
             color: #c9d1d9;
             border-bottom: 1px solid #1c2333;
         }
-        .market-row .label { font-size: 13px; color: #8b949e; }
+        .market-row .label { color: #8b949e; }
         .market-row .value { font-weight: 500; color: #ffffff; }
 
-        /* ----- FLIP CARD (MINIMAL) ----- */
+        /* ----- FLIP CARD ----- */
         .flip-card-mini {
-            margin-top: 10px;
+            margin-top: 6px;
             padding: 10px 14px;
             background: #1c2333;
             border-radius: 10px;
@@ -179,7 +189,7 @@
         }
         .flip-card-mini .back { display: none; }
         .flip-card-mini.flipped .front { display: none; }
-        .flip-card-mini.flipped .back { display: flex; }
+        .flip-card-mini.flipped .back { display: flex; flex-wrap: wrap; }
         .flip-card-mini .rate-item {
             display: flex;
             justify-content: space-between;
@@ -190,7 +200,7 @@
         }
         .flip-card-mini .rate-value { color: #f0c040; font-weight: 500; }
 
-        /* ----- META & LEGAL ----- */
+        /* ----- META ----- */
         .meta {
             font-size: 11px;
             color: #5a6577;
@@ -198,10 +208,7 @@
             padding-top: 10px;
             border-top: 1px solid #1c2333;
         }
-        .meta a {
-            color: #58a6ff;
-            text-decoration: none;
-        }
+        .meta a { color: #58a6ff; text-decoration: none; }
         .meta a:hover { text-decoration: underline; }
 
         /* ----- PBOC PLACEHOLDER ----- */
@@ -211,18 +218,14 @@
             color: #8b949e;
         }
         .pboc-placeholder h2 {
-            color: #f0c040;
+            color: #8b949e;
             font-size: 20px;
             margin-bottom: 6px;
         }
         .pboc-placeholder p { font-size: 14px; line-height: 1.6; }
 
         /* ----- LOADING / ERROR ----- */
-        .loading, .error {
-            font-size: 14px;
-            padding: 16px 0;
-            text-align: center;
-        }
+        .loading, .error { font-size: 14px; padding: 16px 0; text-align: center; }
         .error { color: #f26b6b; }
         .loading { color: #6b7a90; animation: pulse 1.5s infinite; }
         @keyframes pulse {
@@ -231,14 +234,19 @@
             100% { opacity: 0.4; }
         }
 
-        /* ----- RESPONSIVE ----- */
-        @media (min-width: 600px) {
-            body { padding: 40px; align-items: center; }
-            .container { padding: 40px 32px 48px; min-height: auto; }
+        /* ----- RESPONSIVE (DESKTOP) ----- */
+        @media (min-width: 721px) {
+            body { padding: 40px; align-items: center; background: #0d1117; }
+            .container {
+                max-width: 720px;
+                border-radius: 20px;
+                border: 1px solid #30363d;
+                min-height: auto;
+                padding: 40px 32px 48px;
+                background: #161b22;
+            }
             .dual-score { font-size: 48px; }
             .dual-score .arrow { font-size: 28px; }
-            .tabs { gap: 4px; }
-            .tab { font-size: 14px; padding: 8px 16px; }
         }
     </style>
 </head>
@@ -246,7 +254,7 @@
 
 <div class="container" id="app">
 
-    <!-- TABS -->
+    <!-- TABS (FULL WIDTH) -->
     <div class="tabs">
         <button class="tab active" data-tab="ftn">FTN</button>
         <button class="tab" data-tab="gip">GIP</button>
@@ -256,27 +264,39 @@
 
     <!-- FTN -->
     <div id="ftn" class="tab-content active">
-        <div class="suite-header">Index</div>
-        <div class="index-name">F‑Tone (FTN)</div>
+        <div class="index-header">F‑Tone (FTN) <span class="sub">– Federal Reserve Tone Index</span></div>
         <div id="ftn-loading" class="loading">Loading…</div>
         <div id="ftn-data" style="display:none;">
-            <div class="dual-score" id="ftn-dual"></div>
-            <div class="formula" id="ftn-formula">live → 7d avg</div>
-            <div class="label" id="ftn-label"></div>
-            <div class="change" id="ftn-change"></div>
-            <div class="confidence" id="ftn-confidence"></div>
-            <button class="toggle-btn" id="ftn-sources-btn">📄 Sources <span>▼</span></button>
-            <div class="toggle-content" id="ftn-sources"></div>
-            <button class="toggle-btn" id="ftn-market-btn">📊 Market Expectation <span>▼</span></button>
-            <div class="toggle-content" id="ftn-market"></div>
-            <div class="flip-card-mini" id="ftn-flip">
-                <div class="front">↻ Click to see Fed rates</div>
-                <div class="back">
-                    <div class="rate-item"><span>Fed Funds</span><span class="rate-value" id="ftn-fed-funds">--</span></div>
-                    <div class="rate-item"><span>IORB</span><span class="rate-value" id="ftn-iorb">--</span></div>
-                    <div class="rate-item"><span>ON RRP</span><span class="rate-value" id="ftn-onrrp">--</span></div>
+
+            <!-- SECTION 1: Sentiment -->
+            <div class="section">
+                <div class="dual-score" id="ftn-dual"></div>
+                <div class="formula" id="ftn-formula">live → 7d avg</div>
+                <div class="label" id="ftn-label"></div>
+                <div class="change" id="ftn-change"></div>
+                <div class="confidence" id="ftn-confidence"></div>
+                <button class="toggle-btn" id="ftn-sources-btn">📄 Sources <span>▼</span></button>
+                <div class="toggle-content" id="ftn-sources"></div>
+            </div>
+
+            <!-- SECTION 2: Fed Rates (Flip‑card) -->
+            <div class="section">
+                <div class="flip-card-mini" id="ftn-flip">
+                    <div class="front">↻ Click to see Fed rates</div>
+                    <div class="back">
+                        <div class="rate-item"><span>Fed Funds</span><span class="rate-value" id="ftn-fed-funds">--</span></div>
+                        <div class="rate-item"><span>IORB</span><span class="rate-value" id="ftn-iorb">--</span></div>
+                        <div class="rate-item"><span>ON RRP</span><span class="rate-value" id="ftn-onrrp">--</span></div>
+                    </div>
                 </div>
             </div>
+
+            <!-- SECTION 3: Market Expectation -->
+            <div class="section">
+                <button class="toggle-btn" id="ftn-market-btn">📊 Market Expectation <span>▼</span></button>
+                <div class="toggle-content" id="ftn-market"></div>
+            </div>
+
             <div class="meta">
                 <span id="ftn-timestamp"></span>
                 <span style="margin:0 6px;">·</span>
@@ -290,26 +310,31 @@
 
     <!-- GIP -->
     <div id="gip" class="tab-content">
-        <div class="suite-header">Index</div>
-        <div class="index-name">G‑Pulse (GIP)</div>
+        <div class="index-header" style="color:#3cc8ff;">G‑Pulse (GIP) <span class="sub">– Global Inflation Pulse Index</span></div>
         <div id="gip-loading" class="loading">Loading…</div>
         <div id="gip-data" style="display:none;">
-            <div class="dual-score" id="gip-dual"></div>
-            <div class="formula" id="gip-formula">live → 7d avg</div>
-            <div class="label" id="gip-label"></div>
-            <div class="change" id="gip-change"></div>
-            <div class="confidence" id="gip-confidence"></div>
-            <button class="toggle-btn" id="gip-sources-btn">📄 Sources <span>▼</span></button>
-            <div class="toggle-content" id="gip-sources"></div>
-            <button class="toggle-btn" id="gip-market-btn">📊 Market Expectation <span>▼</span></button>
-            <div class="toggle-content" id="gip-market"></div>
-            <div class="flip-card-mini" id="gip-flip">
-                <div class="front">↻ Click to see inflation drivers</div>
-                <div class="back">
-                    <div class="rate-item"><span>CPI (YoY)</span><span class="rate-value" id="gip-cpi">--</span></div>
-                    <div class="rate-item"><span>Core PCE</span><span class="rate-value" id="gip-pce">--</span></div>
-                    <div class="rate-item"><span>Breakeven 5y</span><span class="rate-value" id="gip-breakeven">--</span></div>
+            <div class="section">
+                <div class="dual-score" id="gip-dual"></div>
+                <div class="formula" id="gip-formula">live → 7d avg</div>
+                <div class="label" id="gip-label"></div>
+                <div class="change" id="gip-change"></div>
+                <div class="confidence" id="gip-confidence"></div>
+                <button class="toggle-btn" id="gip-sources-btn" style="color:#3cc8ff;">📄 Sources <span>▼</span></button>
+                <div class="toggle-content" id="gip-sources"></div>
+            </div>
+            <div class="section">
+                <div class="flip-card-mini" id="gip-flip">
+                    <div class="front">↻ Click to see inflation drivers</div>
+                    <div class="back">
+                        <div class="rate-item"><span>CPI (YoY)</span><span class="rate-value" id="gip-cpi">--</span></div>
+                        <div class="rate-item"><span>Core PCE</span><span class="rate-value" id="gip-pce">--</span></div>
+                        <div class="rate-item"><span>Breakeven 5y</span><span class="rate-value" id="gip-breakeven">--</span></div>
+                    </div>
                 </div>
+            </div>
+            <div class="section">
+                <button class="toggle-btn" id="gip-market-btn" style="color:#3cc8ff;">📊 Market Expectation <span>▼</span></button>
+                <div class="toggle-content" id="gip-market"></div>
             </div>
             <div class="meta">
                 <span id="gip-timestamp"></span>
@@ -324,26 +349,31 @@
 
     <!-- GTX -->
     <div id="gtx" class="tab-content">
-        <div class="suite-header">Index</div>
-        <div class="index-name">G‑Tension (GTX)</div>
+        <div class="index-header" style="color:#ff8c42;">G‑Tension (GTX) <span class="sub">– Geopolitical Temperature Index</span></div>
         <div id="gtx-loading" class="loading">Loading…</div>
         <div id="gtx-data" style="display:none;">
-            <div class="dual-score" id="gtx-dual"></div>
-            <div class="formula" id="gtx-formula">live → 7d avg</div>
-            <div class="label" id="gtx-label"></div>
-            <div class="change" id="gtx-change"></div>
-            <div class="confidence" id="gtx-confidence"></div>
-            <button class="toggle-btn" id="gtx-sources-btn">📄 Sources <span>▼</span></button>
-            <div class="toggle-content" id="gtx-sources"></div>
-            <button class="toggle-btn" id="gtx-market-btn">📊 Market Expectation <span>▼</span></button>
-            <div class="toggle-content" id="gtx-market"></div>
-            <div class="flip-card-mini" id="gtx-flip">
-                <div class="front">↻ Click to see risk indicators</div>
-                <div class="back">
-                    <div class="rate-item"><span>VIX</span><span class="rate-value" id="gtx-vix">--</span></div>
-                    <div class="rate-item"><span>Gold Change</span><span class="rate-value" id="gtx-gold">--</span></div>
-                    <div class="rate-item"><span>Defence ETF</span><span class="rate-value" id="gtx-defence">--</span></div>
+            <div class="section">
+                <div class="dual-score" id="gtx-dual"></div>
+                <div class="formula" id="gtx-formula">live → 7d avg</div>
+                <div class="label" id="gtx-label"></div>
+                <div class="change" id="gtx-change"></div>
+                <div class="confidence" id="gtx-confidence"></div>
+                <button class="toggle-btn" id="gtx-sources-btn" style="color:#ff8c42;">📄 Sources <span>▼</span></button>
+                <div class="toggle-content" id="gtx-sources"></div>
+            </div>
+            <div class="section">
+                <div class="flip-card-mini" id="gtx-flip">
+                    <div class="front">↻ Click to see risk indicators</div>
+                    <div class="back">
+                        <div class="rate-item"><span>VIX</span><span class="rate-value" id="gtx-vix">--</span></div>
+                        <div class="rate-item"><span>Gold Change</span><span class="rate-value" id="gtx-gold">--</span></div>
+                        <div class="rate-item"><span>Defence ETF</span><span class="rate-value" id="gtx-defence">--</span></div>
+                    </div>
                 </div>
+            </div>
+            <div class="section">
+                <button class="toggle-btn" id="gtx-market-btn" style="color:#ff8c42;">📊 Market Expectation <span>▼</span></button>
+                <div class="toggle-content" id="gtx-market"></div>
             </div>
             <div class="meta">
                 <span id="gtx-timestamp"></span>
@@ -356,10 +386,9 @@
         <div id="gtx-error" class="error" style="display:none;">Unable to load data. Please try again later.</div>
     </div>
 
-    <!-- PBOC (Placeholder) -->
+    <!-- PBOC -->
     <div id="pboc" class="tab-content">
-        <div class="suite-header">Coming soon</div>
-        <div class="index-name">PBOC Tone Index</div>
+        <div class="index-header" style="color:#8b949e;">PBOC <span class="sub">– Coming soon</span></div>
         <div class="pboc-placeholder">
             <h2>🏛️</h2>
             <p>The People's Bank of China Tone Index is currently in development.</p>
@@ -434,11 +463,8 @@
 
         el(id + '-dual').innerHTML = `<span class="live">${raw.toFixed(1)}</span> <span class="arrow">→</span> <span class="smoothed">${score.toFixed(1)}</span>`;
         el(id + '-formula').innerText = 'live → 7d avg';
-
-        const labelEl = el(id + '-label');
-        labelEl.innerText = label;
-        labelEl.style.color = '#f0c040';
-
+        el(id + '-label').innerText = label;
+        el(id + '-label').style.color = '#ffffff';
         const changeEl = el(id + '-change');
         if (change === 0) {
             changeEl.innerHTML = `— ${Math.abs(change).toFixed(1)}`;
@@ -448,25 +474,20 @@
             changeEl.innerHTML = `${arrow} ${Math.abs(change).toFixed(1)}`;
             changeEl.style.color = change > 0 ? '#f26b6b' : '#4fc97a';
         }
-
         const conf = data.confidence || 'MEDIUM';
         el(id + '-confidence').innerText = `Confidence: ${conf}`;
 
-        // Sources
         const sources = data.sources || [];
         const sourcesEl = el(id + '-sources');
         if (sources.length) {
             sourcesEl.innerHTML = sources.map(s =>
-                `<div style="padding:2px 0; font-size:13px; color:#c9d1d9;"><a href="${s.url}" target="_blank" style="color:#58a6ff;">${s.title}</a> <span style="color:#6b7a90;">(${s.type})</span></div>`
+                `<div style="padding:2px 0; font-size:13px; color:#c9d1d9;"><a href="${s.url}" target="_blank" style="color:#f0c040;">${s.title}</a> <span style="color:#6b7a90;">(${s.type})</span></div>`
             ).join('');
         } else {
             sourcesEl.innerHTML = '<div style="color:#6b7a90; font-size:13px;">No sources available.</div>';
         }
 
-        // Timestamp
         el(id + '-timestamp').innerText = formatTime(data.timestamp);
-
-        // Show data, hide loading
         el(id + '-loading').style.display = 'none';
         el(id + '-data').style.display = 'block';
         el(id + '-error').style.display = 'none';
@@ -526,14 +547,12 @@
         el(id + '-loading').style.display = 'block';
         el(id + '-data').style.display = 'none';
         el(id + '-error').style.display = 'none';
-
         try {
             const res = await fetch(API[id]);
             if (!res.ok) throw new Error('API error');
             const data = await res.json();
             if (data.error) throw new Error(data.error);
             renderIndex(data, id, scale);
-            // Market
             try {
                 const mRes = await fetch(MARKET_API[id]);
                 if (mRes.ok) {
@@ -541,7 +560,6 @@
                     renderMarket(mData, id);
                 }
             } catch (e) { /* ignore */ }
-            // Rates / drivers
             try {
                 const rRes = await fetch(RATES_API[id]);
                 if (rRes.ok) {
